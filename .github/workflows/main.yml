@@ -1,0 +1,54 @@
+name: Deploy website on push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get latest code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.20.0"
+
+      - name: Install & Build
+        run: |
+          npm install
+          npm run build
+
+      # This step creates the perfect .htaccess automatically
+      - name: Create .htaccess for Vite SPA
+        run: |
+          cat > dist/.htaccess << 'EOF'
+          <IfModule mod_rewrite.c>
+            RewriteEngine On
+
+            # Force HTTPS
+            RewriteCond %{HTTPS} off
+            RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+            # React routing
+            RewriteBase /
+            RewriteRule ^index\.html$ - [L]
+            RewriteCond %{REQUEST_FILENAME} !-f
+            RewriteCond %{REQUEST_FILENAME} !-d
+            RewriteRule . /index.html [L]
+          </IfModule>
+          EOF
+
+      - name: Sync files to public_html
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: dist/
+          server-dir: ./
+          dangerous-clean-slate: true
