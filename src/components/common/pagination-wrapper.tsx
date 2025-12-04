@@ -52,6 +52,12 @@ export const PaginationWrapper = ({
   const previousLabel = "« Previous";
   const nextLabel = "Next »";
 
+  const isPreviousLink = (label: string) =>
+    label === previousLabel || label === "pagination.previous";
+
+  const isNextLink = (label: string) =>
+    label === nextLabel || label === "pagination.next";
+
   return (
     <section className={className}>
       <Pagination>
@@ -73,23 +79,23 @@ export const PaginationWrapper = ({
           </PaginationItem>
 
           {links
-            .filter(
-              (link) => link.label !== previousLabel && link.label !== nextLabel
+            ?.filter(
+              (link) => !isPreviousLink(link?.label) && !isNextLink(link?.label)
             )
             ?.map((link, index) => {
-              const pageNumber = getPageNumber(link.url);
+              const pageNumber = getPageNumber(link?.url);
               if (!pageNumber) return null;
 
               return (
                 <PaginationItem key={index}>
                   <PaginationLink
-                    isActive={link.active}
+                    isActive={link?.active}
                     onClick={(e) => {
                       e.preventDefault();
                       handlePageClick(pageNumber);
                     }}
                     className="cursor-pointer">
-                    {link.label}
+                    {link?.label}
                   </PaginationLink>
                 </PaginationItem>
               );
