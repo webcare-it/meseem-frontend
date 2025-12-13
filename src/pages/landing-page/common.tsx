@@ -8,6 +8,10 @@ import { Logo } from "@/components/layout/header/logo";
 import type { LandingPageType } from "./type";
 import { getImageUrl } from "@/helper";
 import { useEffect, useState } from "react";
+import {
+  OptimizedBannerImage,
+  OptimizedImage,
+} from "@/components/common/optimized-image";
 
 interface Props {
   info: LandingPageType;
@@ -72,7 +76,7 @@ export const ProductShowcaseSection = ({ info }: Props) => {
 
   return (
     <div>
-      <Title>{"Premium Quality Products"}</Title>
+      <Title>Premium Quality Products</Title>
       <Swiper
         modules={[Pagination, Autoplay]}
         spaceBetween={16}
@@ -94,8 +98,8 @@ export const ProductShowcaseSection = ({ info }: Props) => {
             <SwiperSlide key={index}>
               <div className="px-2">
                 <div className="rounded-lg bg-blue-50 border border-blue-100 shadow-md overflow-hidden relative h-[270px] w-[300px] md:h-[350px] md:w-[400px] lg:h-[400px] lg:w-[500px]">
-                  <img
-                    src={images?.[imageIndex] || "/placeholder.svg"}
+                  <OptimizedImage
+                    src={images?.[imageIndex] || ""}
                     alt={`Product ${index + 1}`}
                     className="w-full h-full absolute object-cover"
                   />
@@ -124,9 +128,24 @@ export const BenefitsSection = ({ info }: Props) => {
     );
   };
 
+  const hasFeatures = [
+    info?.feature_1,
+    info?.feature_2,
+    info?.feature_3,
+    info?.feature_4,
+    info?.feature_5,
+    info?.feature_6,
+    info?.feature_7,
+    info?.feature_8,
+  ]?.some((feature) => feature);
+
+  if (!hasFeatures) {
+    return null;
+  }
+
   return (
     <div>
-      <Title>{"Benefits"} </Title>
+      <Title>Benefits </Title>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-4 items-baseline md:gap-6">
         {info?.feature_1 && renderHtml(info?.feature_1)}
         {info?.feature_2 && renderHtml(info?.feature_2)}
@@ -145,9 +164,9 @@ export const WhatOurCustomersSaySection = ({ info }: Props) => {
   const images =
     info?.reviews?.map((img) => getImageUrl(img?.review_image)) || [];
 
-  return (
+  return images?.length > 0 ? (
     <div>
-      <Title>{"customer reviews"}</Title>
+      <Title>Customer Reviews</Title>
       <Swiper
         modules={[Pagination, Autoplay]}
         spaceBetween={16}
@@ -167,10 +186,10 @@ export const WhatOurCustomersSaySection = ({ info }: Props) => {
           images?.map((img, index) => (
             <SwiperSlide key={index}>
               <div className="rounded-lg bg-blue-50 border border-blue-100 shadow-md overflow-hidden cursor-grab">
-                <img
-                  src={img}
+                <OptimizedImage
+                  src={img || ""}
                   alt={`Customer Review ${index + 1}`}
-                  className="w-full h-auto object-cover"
+                  className="w-full min-h-80 h-auto object-cover rounded-lg"
                 />
               </div>
             </SwiperSlide>
@@ -178,7 +197,7 @@ export const WhatOurCustomersSaySection = ({ info }: Props) => {
       </Swiper>
       <OrderButton />
     </div>
-  );
+  ) : null;
 };
 
 export const OrderButton = () => {
@@ -192,7 +211,7 @@ export const OrderButton = () => {
     <div className="flex justify-center items-center py-8">
       <motion.button
         onClick={scrollToOrder}
-        className="bg-primary text-primary-foreground px-8 md:px-12 py-3 md:py-6 rounded-full font-bold text-xl shadow-2xl cursor-pointer"
+        className="bg-primary text-primary-foreground px-7 md:px-10 py-2.5 md:py-5 rounded-full font-bold text-xl shadow-2xl cursor-pointer"
         animate={{
           scale: [1, 1.2, 1],
         }}
@@ -222,13 +241,22 @@ export const BannerSection = ({ info }: Props) => {
     <div>
       {info?.banner_image ? (
         <div className="relative aspect-video rounded-lg overflow-hidden">
-          <img
-            src={getImageUrl(info?.banner_image)}
+          <OptimizedBannerImage
+            src={info?.banner_image}
             alt="banner"
             className="w-full h-full object-cover absolute"
           />
         </div>
-      ) : info?.video_id ? (
+      ) : null}
+      {info?.banner_image ? <OrderButton /> : null}
+    </div>
+  );
+};
+
+export const VideoSection = ({ info }: Props) => {
+  return (
+    <div>
+      {info?.video_id ? (
         <div className="aspect-video relative rounded-lg overflow-hidden">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -250,7 +278,7 @@ export const BannerSection = ({ info }: Props) => {
           </motion.div>
         </div>
       ) : null}
-      {info?.banner_image || info?.video_id ? <OrderButton /> : null}
+      {info?.video_id ? <OrderButton /> : null}
     </div>
   );
 };
@@ -442,13 +470,13 @@ export const DateCounter = ({ date }: { date: string }) => {
   );
 };
 
-export const PriceTicker = () => {
+export const PriceTicker = ({ info }: Props) => {
   const [currentPriceIndex, setCurrentPriceIndex] = useState(0);
 
   const prices = [
     {
-      original: "৳1230",
-      discounted: "৳999",
+      original: `৳${info?.regular_price}`,
+      discounted: `৳${info?.discount_price}`,
       previousText: "Previous Price",
       offerText: "Offer Price",
     },
@@ -505,10 +533,9 @@ export const PriceTicker = () => {
             </motion.h2>
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 z-10 relative">
               <div className="flex items-center gap-6">
-                {/* Original price with X animation */}
                 <div className="relative">
                   <motion.div
-                    className="line-through text-gray-300 text-4xl font-bold"
+                    className="line-through text-gray-300 text-3xl font-bold"
                     key={`original-${currentPriceIndex}`}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -571,7 +598,7 @@ export const PriceTicker = () => {
               <div className="flex items-center gap-6">
                 <div className="relative">
                   <motion.div
-                    className="text-white text-4xl md:text-5xl font-extrabold"
+                    className="text-white text-4xl font-extrabold"
                     key={`discounted-${currentPriceIndex}`}
                     initial={{ scale: 0.5, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}

@@ -45,12 +45,12 @@ export const CheckoutButton = ({
   const style = {
     CARD: {
       size: "xs",
-      variant: "secondary",
+      variant: "outline",
       icon: <ClipboardCheck className="h-2 w-2" />,
     },
     DETAILS: {
       size: "lg",
-      variant: "secondary",
+      variant: "outline",
       icon: <ClipboardCheck className="h-4 w-4" />,
     },
   };
@@ -62,13 +62,13 @@ export const CheckoutButton = ({
         disabled={isLoading}
         className="w-full border border-primary"
         size="xs"
-        variant="secondary">
+        variant="outline">
         {isLoading ? (
           <Spinner />
         ) : (
           <>
             <ClipboardCheck className="h-4 w-4 hidden md:block text-primary" />
-            <span className="text-primary text-[10px]">{"Checkout"}</span>
+            <span className="text-primary text-[10px]">Order now</span>
           </>
         )}
       </Button>
@@ -92,7 +92,7 @@ export const CheckoutButton = ({
       ) : (
         <>
           {style[type].icon}
-          {"Checkout"}
+          Order now
         </>
       )}
     </Button>

@@ -29,6 +29,7 @@ import {
 import { toast } from "react-hot-toast";
 import { apiErrorHandler } from "@/api/utils/error";
 import { getCookie, setCookie } from "@/lib/cookie";
+import { BaseLayout } from "@/components/layout/base-layout";
 
 export const ForgotPasswordPage = () => {
   const navigate = useNavigate();
@@ -155,188 +156,187 @@ export const ForgotPasswordPage = () => {
   return (
     <>
       <SeoWrapper title="Forgot password" />
-      <div
-        style={{
-          backgroundImage: "url('/forgot-password.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-        className="flex min-h-svh flex-col items-center justify-center">
-        <div className="flex w-full max-w-lg flex-col gap-6">
-          <div className={cn("flex flex-col gap-4 md:gap-6")}>
-            <Card className="p-4">
-              <CardHeader className="flex gap-2 flex-col items-center justify-center">
-                <Link to="/">
-                  <Logo type="DESKTOP" />
-                </Link>
-                <div className="text-center">
-                  <CardTitle className="text-xl">{titleText}</CardTitle>
-                  <CardDescription className="mt-2 md:mt-3">
-                    {descriptionText}
-                  </CardDescription>
-                </div>
-              </CardHeader>
-              <CardContent className="px-3 md:px-5">
-                <div className="relative overflow-hidden pb-4">
-                  <AnimatePresence mode="wait" initial={false}>
-                    {step === "phone" && (
-                      <motion.div
-                        key="step-phone"
-                        initial={{ x: 40, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        exit={{ x: -40, opacity: 0 }}
-                        transition={{
-                          type: "spring",
-                          stiffness: 260,
-                          damping: 24,
-                        }}
-                        className="space-y-4 px-1"
-                        tabIndex={0}
-                        onKeyDown={handleEnterKey}>
-                        <PhoneInput
-                          id="phone"
-                          name="phone"
-                          className="md:h-12"
-                          label="Phone"
-                          placeholder="01XXXXXXXXX"
-                          onValidationChange={handlePhoneValidated}
-                        />
-                        <Button
-                          onClick={goToOtp}
-                          disabled={!isPhoneValid || isSendingOtp}
-                          className="w-full md:h-12">
-                          Continue
-                        </Button>
-                      </motion.div>
-                    )}
+      <BaseLayout isShowMegaMenu={false}>
+        <section className="flex justify-center items-center my-10">
+          <div className="flex w-full max-w-lg flex-col gap-6">
+            <div className={cn("flex flex-col gap-4 md:gap-6")}>
+              <Card className="p-4 mx-4 md:mx-0">
+                <CardHeader className="flex gap-2 flex-col items-center justify-center">
+                  <Link to="/">
+                    <Logo type="DESKTOP" />
+                  </Link>
+                  <div className="text-center">
+                    <CardTitle className="text-xl">{titleText}</CardTitle>
+                    <CardDescription className="mt-2 md:mt-3">
+                      {descriptionText}
+                    </CardDescription>
+                  </div>
+                </CardHeader>
+                <CardContent className="px-3 md:px-5">
+                  <div className="relative overflow-hidden pb-4">
+                    <AnimatePresence mode="wait" initial={false}>
+                      {step === "phone" && (
+                        <motion.div
+                          key="step-phone"
+                          initial={{ x: 40, opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          exit={{ x: -40, opacity: 0 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 260,
+                            damping: 24,
+                          }}
+                          className="space-y-4 px-1"
+                          tabIndex={0}
+                          onKeyDown={handleEnterKey}>
+                          <PhoneInput
+                            id="phone"
+                            name="phone"
+                            className="md:h-12"
+                            label="Phone"
+                            placeholder="01XXXXXXXXX"
+                            onValidationChange={handlePhoneValidated}
+                          />
+                          <Button
+                            onClick={goToOtp}
+                            disabled={!isPhoneValid || isSendingOtp}
+                            className="w-full md:h-12">
+                            Continue
+                          </Button>
+                        </motion.div>
+                      )}
 
-                    {step === "otp" && (
-                      <motion.div
-                        key="step-otp"
-                        initial={{ x: 60, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        exit={{ x: -60, opacity: 0 }}
-                        transition={{
-                          type: "spring",
-                          stiffness: 260,
-                          damping: 24,
-                        }}
-                        className="space-y-4 px-1"
-                        tabIndex={0}
-                        onKeyDown={handleEnterKey}>
-                        <div className="space-y-2 flex flex-col justify-center items-center">
-                          <span className="font-semibold text-foreground">
-                            {phone}
-                          </span>
-                          <InputOTP maxLength={6} value={otp} onChange={setOtp}>
-                            <InputOTPGroup>
-                              <InputOTPSlot index={0} />
-                              <InputOTPSlot index={1} />
-                              <InputOTPSlot index={2} />
-                            </InputOTPGroup>
-                            <InputOTPSeparator />
-                            <InputOTPGroup>
-                              <InputOTPSlot index={3} />
-                              <InputOTPSlot index={4} />
-                              <InputOTPSlot index={5} />
-                            </InputOTPGroup>
-                          </InputOTP>
-                        </div>
-                        <div className="flex gap-2">
-                          <Button
-                            variant="outline"
-                            className="flex-1 md:h-12"
-                            onClick={() => setStep("phone")}>
-                            Back
-                          </Button>
-                          <Button
-                            onClick={goToReset}
-                            disabled={otp.trim().length !== 6 || isVerifying}
-                            className="flex-1 md:h-12">
-                            Verify
-                          </Button>
-                        </div>
-                      </motion.div>
-                    )}
+                      {step === "otp" && (
+                        <motion.div
+                          key="step-otp"
+                          initial={{ x: 60, opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          exit={{ x: -60, opacity: 0 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 260,
+                            damping: 24,
+                          }}
+                          className="space-y-4 px-1"
+                          tabIndex={0}
+                          onKeyDown={handleEnterKey}>
+                          <div className="space-y-2 flex flex-col justify-center items-center">
+                            <span className="font-semibold text-foreground">
+                              {phone}
+                            </span>
+                            <InputOTP
+                              maxLength={6}
+                              value={otp}
+                              onChange={setOtp}>
+                              <InputOTPGroup>
+                                <InputOTPSlot index={0} />
+                                <InputOTPSlot index={1} />
+                                <InputOTPSlot index={2} />
+                              </InputOTPGroup>
+                              <InputOTPSeparator />
+                              <InputOTPGroup>
+                                <InputOTPSlot index={3} />
+                                <InputOTPSlot index={4} />
+                                <InputOTPSlot index={5} />
+                              </InputOTPGroup>
+                            </InputOTP>
+                          </div>
+                          <div className="flex gap-2">
+                            <Button
+                              variant="outline"
+                              className="flex-1 md:h-12"
+                              onClick={() => setStep("phone")}>
+                              Back
+                            </Button>
+                            <Button
+                              onClick={goToReset}
+                              disabled={otp.trim().length !== 6 || isVerifying}
+                              className="flex-1 md:h-12">
+                              Verify
+                            </Button>
+                          </div>
+                        </motion.div>
+                      )}
 
-                    {step === "reset" && (
-                      <motion.div
-                        key="step-reset"
-                        initial={{ x: -60, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        exit={{ x: 60, opacity: 0 }}
-                        transition={{
-                          type: "spring",
-                          stiffness: 260,
-                          damping: 24,
-                        }}
-                        className="space-y-4 px-1"
-                        tabIndex={0}
-                        onKeyDown={handleEnterKey}>
-                        <div className="space-y-3">
-                          <div className="space-y-1">
-                            <Password
-                              id="new-password"
-                              name="new-password"
-                              label={"New Password"}
-                              className="md:h-12"
-                              placeholder={"Enter your new password"}
-                              value={password}
-                              onChange={(e) => setPassword(e.target.value)}
-                              required
-                            />
+                      {step === "reset" && (
+                        <motion.div
+                          key="step-reset"
+                          initial={{ x: -60, opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          exit={{ x: 60, opacity: 0 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 260,
+                            damping: 24,
+                          }}
+                          className="space-y-4 px-1"
+                          tabIndex={0}
+                          onKeyDown={handleEnterKey}>
+                          <div className="space-y-3">
+                            <div className="space-y-1">
+                              <Password
+                                id="new-password"
+                                name="new-password"
+                                label={"New Password"}
+                                className="md:h-12"
+                                placeholder={"Enter your new password"}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                              />
+                            </div>
+                            <div className="space-y-1">
+                              <Password
+                                id="confirm-password"
+                                name="confirm-password"
+                                label={"Confirm Password"}
+                                className="md:h-12"
+                                placeholder={"Enter your confirm password"}
+                                value={confirmPassword}
+                                onChange={(e) =>
+                                  setConfirmPassword(e.target.value)
+                                }
+                                ariaInvalid={
+                                  password.length > 0 &&
+                                  confirmPassword.length > 0 &&
+                                  password !== confirmPassword
+                                }
+                                required
+                              />
+                              {password &&
+                                confirmPassword &&
+                                password !== confirmPassword && (
+                                  <div className="text-xs text-destructive">
+                                    Passwords do not match
+                                  </div>
+                                )}
+                            </div>
                           </div>
-                          <div className="space-y-1">
-                            <Password
-                              id="confirm-password"
-                              name="confirm-password"
-                              label={"Confirm Password"}
-                              className="md:h-12"
-                              placeholder={"Enter your confirm password"}
-                              value={confirmPassword}
-                              onChange={(e) =>
-                                setConfirmPassword(e.target.value)
-                              }
-                              ariaInvalid={
-                                password.length > 0 &&
-                                confirmPassword.length > 0 &&
-                                password !== confirmPassword
-                              }
-                              required
-                            />
-                            {password &&
-                              confirmPassword &&
-                              password !== confirmPassword && (
-                                <div className="text-xs text-destructive">
-                                  Passwords do not match
-                                </div>
-                              )}
+                          <div className="flex gap-2">
+                            <Button
+                              variant="outline"
+                              className="flex-1 md:h-12"
+                              onClick={() => setStep("otp")}>
+                              Back
+                            </Button>
+                            <Button
+                              className="flex-1 md:h-12"
+                              disabled={!canSubmitReset || isResetting}
+                              onClick={handleReset}>
+                              Reset password
+                            </Button>
                           </div>
-                        </div>
-                        <div className="flex gap-2">
-                          <Button
-                            variant="outline"
-                            className="flex-1 md:h-12"
-                            onClick={() => setStep("otp")}>
-                            Back
-                          </Button>
-                          <Button
-                            className="flex-1 md:h-12"
-                            disabled={!canSubmitReset || isResetting}
-                            onClick={handleReset}>
-                            Reset password
-                          </Button>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </CardContent>
-            </Card>
-            <AuthDescription />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </CardContent>
+              </Card>
+              <AuthDescription />
+            </div>
           </div>
-        </div>
-      </div>
+        </section>
+      </BaseLayout>
     </>
   );
 };

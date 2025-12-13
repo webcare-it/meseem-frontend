@@ -1,5 +1,4 @@
 import { SeoWrapper } from "@/components/common/seo-wrapper";
-
 import { useGetUserOrderDetails } from "@/api/queries/userOrders";
 import { DashboardLayout } from "@/components/layout/dashboard-layout";
 import type { InvoiceType } from "@/type";

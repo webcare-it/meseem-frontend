@@ -1,4 +1,3 @@
-import { IMAGE_URL } from "@/constant";
 import type { ConfigType } from "@/hooks/useConfig";
 import type {
   ProductDetailsType,
@@ -7,6 +6,7 @@ import type {
   UserType,
   VariantType,
 } from "@/type";
+import { IMAGE_URL } from "../constant";
 
 export const getImageUrl = (url: string) => {
   return `${IMAGE_URL}${url}`;

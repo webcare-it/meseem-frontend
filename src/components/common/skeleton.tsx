@@ -18,9 +18,7 @@ export const Skeleton = ({
   rounded,
 }: ShimmerType) => {
   const style: React.CSSProperties = {};
-  const classes: string[] = [
-    "relative overflow-hidden bg-gray-300 dark:bg-gray-700",
-  ];
+  const classes: string[] = ["relative overflow-hidden bg-gray-100"];
 
   if (width) {
     style.width = width;
@@ -43,7 +41,7 @@ export const Skeleton = ({
   return (
     <div className={cn(classes.join(" "), className)} style={style}>
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/80 to-transparent"
+        className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent"
         initial={{ x: "-100%" }}
         animate={{ x: "100%" }}
         transition={{

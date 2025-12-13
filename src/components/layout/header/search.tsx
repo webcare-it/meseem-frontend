@@ -11,7 +11,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search, MoveUpRight } from "lucide-react";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useSearchSuggestion } from "@/api/queries/useSuggestion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 interface ActionType {
@@ -29,8 +29,9 @@ interface SearchResultType {
 const ActionSearchBarComponent = forwardRef<HTMLInputElement | null>(
   (_, ref) => {
     const navigate = useNavigate();
-
-    const [query, setQuery] = useState("");
+    const [searchParams] = useSearchParams();
+    const searchQuery = searchParams.get("query") || "";
+    const [query, setQuery] = useState(searchQuery);
     const [result, setResult] = useState<SearchResultType | null>(null);
     const [isFocused, setIsFocused] = useState(false);
     const debouncedQuery = useDebounce(query, 200);
@@ -198,7 +199,7 @@ const ActionSearchBarComponent = forwardRef<HTMLInputElement | null>(
                 })
               }
               className="w-full h-full flex items-center justify-center cursor-pointer">
-              <Search className="w-5 h-5 text-white" />
+              <Search className="w-5 h-5 text-primary-foreground" />
             </button>
           </div>
 

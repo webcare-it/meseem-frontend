@@ -1,6 +1,5 @@
 import { SectionTitle } from "@/components/common/section-title";
 import { SeoWrapper } from "@/components/common/seo-wrapper";
-
 import { DashboardLayout } from "@/components/layout/dashboard-layout";
 import { BreadcrumbWrapper } from "@/components/common/breadcrumb-wrapper";
 import { useGetOrdersQuery } from "@/api/queries/userOrders";

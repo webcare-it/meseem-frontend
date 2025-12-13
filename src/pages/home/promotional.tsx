@@ -8,7 +8,7 @@ import { Skeleton } from "@/components/common/skeleton";
 import { ImageWithLink } from "@/components/common/image-link";
 import type { FlashDealType, HomeBannerPropsType } from "@/type";
 import { getConfig, getFormattedBanner, slugify } from "@/helper";
-import { SectionTitle } from "@/components/common/section-title";
+import { HomeSectionTitle } from "@/components/common/section-title";
 
 import { useConfig } from "@/hooks/useConfig";
 
@@ -29,7 +29,7 @@ const PromotionalSection = ({
 
   return (
     <div className="w-full px-2 md:px-0">
-      {isShowTitle && <SectionTitle title={"Flash Deal"} />}
+      {isShowTitle && <HomeSectionTitle title="Flash Deal" />}
       <Swiper
         spaceBetween={30}
         effect={"fade"}

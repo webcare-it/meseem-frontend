@@ -5,7 +5,7 @@ import { CartItem } from "./item";
 import { CartSummary } from "@/components/card/summary";
 import { CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SectionTitle } from "@/components/common/section-title";
+import { HomeSectionTitle } from "@/components/common/section-title";
 import { Link } from "react-router-dom";
 import { SeoWrapper } from "@/components/common/seo-wrapper";
 import { EmptyCart } from "@/components/common/empty-cart";
@@ -33,7 +33,7 @@ export const CartPage = () => {
       <SeoWrapper title="My Cart" />
       <BaseLayout>
         <section className="mb-10 md:mb-20 mt-10">
-          <SectionTitle title="My Cart" />
+          <HomeSectionTitle title="My Cart" />
           {cart?.items?.length === 0 ? (
             <EmptyCart />
           ) : (

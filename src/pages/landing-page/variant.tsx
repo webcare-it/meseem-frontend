@@ -154,14 +154,13 @@ export const LandingVariantCard = ({
       {product?.variants &&
         product?.variants?.length > 0 &&
         getUniqueSizes(product)?.length > 0 && (
-          <div className="flex items-center gap-2 mb-1 md:mb-2">
+          <div className="flex items-center flex-wrap gap-2 mb-1 md:mb-2">
             <span className="text-sm font-medium">{"Sizes"}:</span>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center flex-wrap gap-2">
               {getUniqueSizes(product)?.map((size) => (
                 <Button
                   key={size}
                   variant={selectedSize === size ? "default" : "outline"}
-                  size="icon-sm"
                   disabled={isLoading}
                   onClick={(e) => handleSizeSelect(size, e)}
                   className={cn(

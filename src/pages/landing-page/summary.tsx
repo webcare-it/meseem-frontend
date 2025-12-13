@@ -1,7 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useGetCampaignSummaryQuery } from "@/api/queries/useGetCart";
-
 import { useSelector } from "react-redux";
 import type { RootStateType } from "@/redux/store";
 import { getConfig, getImageUrl } from "@/helper";
@@ -42,7 +41,7 @@ export const CampaignCartSummary = ({ children }: Props) => {
 
   return (
     <Card className={cn("p-4 md:p-6 md:sticky md:top-28 bg-card")}>
-      <h2 className="text-xl font-bold text-foreground">{"ORDER SUMMERY"}</h2>
+      <h2 className="text-xl font-bold text-foreground">ORDER SUMMERY</h2>
 
       {campaign?.length > 0 ? (
         <div className="flex flex-col gap-2">
@@ -95,8 +94,8 @@ export const CampaignCartSummary = ({ children }: Props) => {
               <span className="text-2xl font-bold">!</span>
             </div>
             <div className="flex flex-col items-center text-foreground text-sm md:text-base">
-              <span className="font-medium">{"No Items"}</span>
-              <span>{"Add items to cart"}</span>
+              <span className="font-medium">No Items</span>
+              <span>Add items to cart</span>
             </div>
           </div>
         </div>
@@ -106,36 +105,34 @@ export const CampaignCartSummary = ({ children }: Props) => {
 
       <div className="space-y-1 md:space-y-3">
         <div className="flex justify-between">
-          <span className="text-muted-foreground">{"Sub Total"}:</span>
+          <span className="text-muted-foreground">Sub Total:</span>
           <span className="font-medium">
-            {cartSummary?.sub_total || " ৳00.00"}
+            {cartSummary?.sub_total || "৳00.00"}
           </span>
         </div>
         <div className="flex justify-between">
-          <span className="text-muted-foreground">{"Shipping Cost"}:</span>
+          <span className="text-muted-foreground">Shipping Cost:</span>
           <span className="font-medium">
-            {cartSummary?.shipping_cost || " ৳00.00"}
+            {cartSummary?.shipping_cost || "৳00.00"}
           </span>
         </div>
         <div className="flex justify-between">
-          <span className="text-muted-foreground">{"Discount"}:</span>
+          <span className="text-muted-foreground">Discount:</span>
           <span className="text-green-600 font-semibold">
-            {cartSummary?.discount || " ৳00.00"}
+            {cartSummary?.discount || "৳00.00"}
           </span>
         </div>
 
         <div className="flex justify-between">
-          <span className="text-muted-foreground">
-            {"Estimated sales tax"}:
-          </span>
-          <span className="font-medium">{cartSummary?.tax || " ৳00.00"}</span>
+          <span className="text-muted-foreground">Estimated sales tax:</span>
+          <span className="font-medium">{cartSummary?.tax || "৳00.00"}</span>
         </div>
       </div>
 
       <Separator />
 
       <div className="flex justify-between text-lg font-bold">
-        <span>{"Total Amount"}</span>
+        <span>Total Amount</span>
         <span>{cartSummary?.grand_total || " ৳00.00"}</span>
       </div>
 

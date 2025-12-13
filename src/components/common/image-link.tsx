@@ -1,4 +1,3 @@
-import { getImageUrl } from "@/helper";
 import { Link } from "react-router-dom";
 import { OptimizedBannerImage } from "./optimized-image";
 
@@ -12,18 +11,18 @@ export const ImageWithLink = ({
       {item?.link ? (
         <Link to={item?.link}>
           <OptimizedBannerImage
-            src={item?.image ? getImageUrl(item?.image) : "/placeholder.svg"}
+            src={item?.image || ""}
             className="w-full h-full object-cover absolute inset-0 cursor-pointer"
             alt="slider"
           />
         </Link>
-      ) : item?.image ? (
+      ) : (
         <OptimizedBannerImage
-          src={item?.image ? getImageUrl(item?.image) : "/placeholder.svg"}
+          src={item?.image || ""}
           className="w-full h-full object-cover absolute inset-0 cursor-grab"
           alt="slider"
         />
-      ) : null}
+      )}
     </div>
   );
 };

@@ -175,14 +175,13 @@ export const VariantCard = ({
       {product?.variants &&
         product?.variants?.length > 0 &&
         getUniqueSizes(product)?.length > 0 && (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <span className="text-sm font-medium">{"Sizes"}:</span>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center flex-wrap gap-2">
               {getUniqueSizes(product)?.map((size) => (
                 <Button
                   key={size}
                   variant={selectedSize === size ? "default" : "outline"}
-                  size="icon-sm"
                   onClick={() => handleSizeSelect(size)}
                   className={cn(
                     "flex items-center justify-center transition-all",

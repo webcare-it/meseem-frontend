@@ -7,7 +7,6 @@ import { getImageUrl, getVariant } from "@/helper";
 import type { ProductDetailsType, ProductType, StateSyncType } from "@/type";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootStateType } from "@/redux/store";
-
 import { useCampaignAddToCart } from "@/controllers/campaignController";
 import { useGetCampaignCartQuery } from "@/api/queries/useGetCart";
 import { setCartItemsCampaign } from "@/redux/slice/campaignSlice";
@@ -65,7 +64,7 @@ export const ProductSection = ({ info }: Props) => {
 
   return (
     <section id="order-section" ref={ref}>
-      <Title>{"Choose Your Favorite Products"}</Title>
+      <Title>Choose Your Favorite Products</Title>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {products?.map((product) => (

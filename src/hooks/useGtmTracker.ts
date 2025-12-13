@@ -64,11 +64,8 @@ export const useGtmTracker = () => {
         event: "begin_checkout",
         ecommerce: {
           currency: "BDT",
-          customer_type: "new",
-          coupon: getLocalStorage("coupon_code") || "",
           value: data?.value,
           items: data?.items,
-          transaction_id: data?.transaction_id,
         },
       });
     }
@@ -86,6 +83,7 @@ export const useGtmTracker = () => {
           customer_type: data?.customer_type || "new",
           coupon: getLocalStorage("coupon_code") || "",
           value: data?.value,
+          shipping: data?.shipping || 0,
           items: data?.items,
           transaction_id: data?.transaction_id,
         },

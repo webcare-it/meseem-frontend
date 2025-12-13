@@ -89,7 +89,6 @@ export const ProductCard = ({ product }: Props) => {
         {modalConfig.type === "DETAILS" && (
           <DetailsModal
             id={product?.id as unknown as string}
-            onHideModal={onHideModal}
             onShowModal={onShowModal}
           />
         )}

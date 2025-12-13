@@ -13,7 +13,6 @@ import { ImageGallery } from "../common/image-gallery";
 
 interface Props {
   id: string;
-  onHideModal: () => void;
   onShowModal?: (
     type: string,
     title?: string,
@@ -28,7 +27,7 @@ interface DetailsModalResponse {
 }
 type StateType = string | null;
 
-export const DetailsModal = ({ id, onHideModal, onShowModal }: Props) => {
+export const DetailsModal = ({ id, onShowModal }: Props) => {
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState<number>(1);
   const [displayPrice, setDisplayPrice] = useState<string>("0");
@@ -99,7 +98,6 @@ export const DetailsModal = ({ id, onHideModal, onShowModal }: Props) => {
                 selectedSize,
                 product?.variants
               )}
-              onHideModal={onHideModal}
               onShowModal={onShowModal}
             />
           </div>

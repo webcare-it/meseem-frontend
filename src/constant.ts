@@ -1,4 +1,3 @@
-// JUST HAVE TO CHANGE IT
 export const BACKEND_URL = `https://backend.meseem.com`;
 
 /** DON'T TOUCH HERE */

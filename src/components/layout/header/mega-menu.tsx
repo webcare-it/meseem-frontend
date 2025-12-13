@@ -263,7 +263,11 @@ export const MegaMenu = () => {
                               <Link
                                 to={item?.href as string}
                                 onClick={closeMenu}
-                                className="font-medium hover:text-primary transition-colors hover:underline cursor-pointer">
+                                className={`font-medium hover:text-primary transition-colors hover:underline cursor-pointer ${
+                                  isPathActive(pathname, item?.href)
+                                    ? "text-primary"
+                                    : "text-muted-foreground"
+                                }`}>
                                 {item?.name || `Category ${index + 1}`}
                               </Link>
                             </NavigationMenuLink>

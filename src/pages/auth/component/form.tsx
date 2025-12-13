@@ -117,13 +117,13 @@ export const SignUpForm = () => {
             {isPending ? (
               <>
                 <Spinner />
-                "Processing..."
+                Processing...
               </>
             ) : (
               "Sign up"
             )}
           </Button>
-          <FieldDescription className="text-center">
+          <FieldDescription className="text-center mb-4">
             Already have an account?
             <Link to="/signin" className="text-primary ml-1   ">
               Sign in

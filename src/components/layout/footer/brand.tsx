@@ -19,20 +19,26 @@ export const BrandFooter = () => {
           ))
         ) : (
           <>
-            {brands?.map((item) => (
-              <li key={item?.name}>
-                <Link
-                  to={`/brands/${item?.id}/${slugify(item?.name)}`}
-                  className={`hover:text-primary/70 hover:underline transition-colors text-sm line-clamp-1 ${
-                    location.pathname ===
-                    `/brands/${item?.id}/${slugify(item?.name)}`
-                      ? "text-primary"
-                      : ""
-                  }`}>
-                  {item?.name}
-                </Link>
+            {brands && brands?.length > 0 ? (
+              brands?.map((item) => (
+                <li key={item?.name}>
+                  <Link
+                    to={`/brands/${item?.id}/${slugify(item?.name)}`}
+                    className={`hover:text-primary/70 hover:underline transition-colors text-sm line-clamp-1 ${
+                      location.pathname ===
+                      `/brands/${item?.id}/${slugify(item?.name)}`
+                        ? "text-primary"
+                        : ""
+                    }`}>
+                    {item?.name}
+                  </Link>
+                </li>
+              ))
+            ) : (
+              <li key="no-brands">
+                <span className="text-sm text-white">No brands found</span>
               </li>
-            ))}
+            )}
           </>
         )}
       </ul>

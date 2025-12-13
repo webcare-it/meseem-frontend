@@ -1,5 +1,5 @@
 import { Heart, ShoppingCart } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ActionSearchBar } from "./search";
 import { UserProfile } from "./user";
@@ -13,6 +13,7 @@ export const HeaderDesktop = ({
 }: {
   isShowMegaMenu: boolean;
 }) => {
+  const pathname = useLocation();
   const cart = useSelector((state: RootStateType) => state.cart);
   const wishlist = useSelector((state: RootStateType) => state.wishlist);
 
@@ -38,7 +39,11 @@ export const HeaderDesktop = ({
 
           <div className="flex items-center gap-3 w-full md:w-auto justify-end">
             <Link to="/track-order" title="Track Order">
-              <Button variant="ghost" className="hover:text-primary">
+              <Button
+                variant="ghost"
+                className={`hover:text-primary ${
+                  pathname.pathname === "/track-order" ? "text-primary" : ""
+                }`}>
                 Track Order
               </Button>
             </Link>
@@ -46,7 +51,9 @@ export const HeaderDesktop = ({
               <Button
                 variant="ghost"
                 size="icon-lg"
-                className="relative hover:text-primary">
+                className={`hover:text-primary ${
+                  pathname.pathname === "/wishlist" ? "text-primary" : ""
+                }`}>
                 <div title="Wishlist" className="relative">
                   <Heart className="h-6 w-6" />
                   {wishlist?.items?.length > 0 && (
@@ -63,7 +70,9 @@ export const HeaderDesktop = ({
               <Button
                 variant="ghost"
                 size="icon-lg"
-                className="relative hover:text-primary">
+                className={`hover:text-primary ${
+                  pathname.pathname === "/cart" ? "text-primary" : ""
+                }`}>
                 <div title="Shopping Cart" className="relative">
                   <ShoppingCart className="h-6 w-6" />
                   {cart?.items?.length > 0 && (

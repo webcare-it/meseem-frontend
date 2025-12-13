@@ -1,7 +1,9 @@
 import { SeoWrapper } from "@/components/common/seo-wrapper";
 import { BaseLayout } from "@/components/layout/base-layout";
-
-import { SectionTitle } from "@/components/common/section-title";
+import {
+  HomeSectionTitle,
+  SectionTitle,
+} from "@/components/common/section-title";
 import { DashboardLayout } from "@/components/layout/dashboard-layout";
 import { BreadcrumbWrapper } from "@/components/common/breadcrumb-wrapper";
 import { OrderTrack } from "./components/order";
@@ -12,7 +14,7 @@ export const OrderTrackGuestPage = () => {
       <SeoWrapper title={"Order Track"} />
       <BaseLayout isShowMegaMenu={false}>
         <section className="mb-10 md:mb-20 mt-10 px-4 md:px-0">
-          <SectionTitle title={"Order Track"} />
+          <HomeSectionTitle title={"Order Track"} />
 
           <OrderTrack path="/track-order" />
         </section>

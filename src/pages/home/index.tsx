@@ -22,6 +22,7 @@ export const HomePage = () => {
   useEffect(() => {
     removeLocalStorage("coupon_code");
     removeLocalStorage("order_completed");
+    removeLocalStorage("selected_shipping_method");
   }, []);
 
   const orderedSections = useMemo(() => {
