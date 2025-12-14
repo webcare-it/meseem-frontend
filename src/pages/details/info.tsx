@@ -2,15 +2,15 @@ import { useState } from "react";
 import type { ProductDetailsType, ProductType } from "@/type";
 import { CartButton } from "@/components/common/cart-button";
 import { VariantCard } from "@/components/card/variant";
-import { getImageUrl, getVariant } from "@/helper";
+import { getVariant } from "@/helper";
 import { Review } from "@/components/card/review";
 import { FeatureCards } from "@/pages/details/feature";
 import { Discount } from "@/components/common/discount";
 import { CheckoutButton } from "@/components/common/checkout-button";
-
 import { useModal } from "@/hooks/useModal";
 import { ModalWrapper } from "@/components/common/modal-wrapper";
 import { ProductSuccess } from "@/components/card/product";
+import { OptimizedImage } from "@/components/common/optimized-image";
 
 interface Props {
   product: ProductDetailsType;
@@ -24,7 +24,10 @@ export const ProductInfo = ({ product, onVariantImageChange }: Props) => {
   const [selectedSize, setSelectedSize] = useState<StateType>(null);
   const [selectedColor, setSelectedColor] = useState<StateType>(null);
   const [displayPrice, setDisplayPrice] = useState<string>(
-    product?.variants?.[0]?.variant_price_string || "0"
+    product?.variants?.[0]?.variant_price_string ||
+      `${product?.currency_symbol}${product?.calculable_price}` ||
+      product?.main_price ||
+      "৳0"
   );
   const { modalRef, modalConfig, onHideModal, onShowModal } = useModal();
   const hasBrand = product?.brand?.name || product?.brand?.logo;
@@ -60,8 +63,8 @@ export const ProductInfo = ({ product, onVariantImageChange }: Props) => {
             <span className="text-sm font-medium">{"Brand"}:</span>
             <div className="flex items-center gap-2">
               {product?.brand?.logo ? (
-                <img
-                  src={getImageUrl(product?.brand?.logo)}
+                <OptimizedImage
+                  src={product?.brand?.logo || ""}
                   alt={product?.brand?.name}
                   className="w-20 h-10 object-contain"
                 />

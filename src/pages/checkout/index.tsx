@@ -81,12 +81,12 @@ export const CheckoutPage = () => {
                     {isPending || otpLoading ? (
                       <>
                         <Spinner />
-                        <span>"Processing..."</span>
+                        <span>Processing...</span>
                       </>
                     ) : (
                       <>
                         <CreditCard className="h-5 w-5 mr-2" />
-                        <span>"Place Order"</span>
+                        <span>Place Order</span>
                       </>
                     )}
                   </Button>
