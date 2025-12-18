@@ -7,6 +7,7 @@ import type { VariantProps } from "class-variance-authority";
 import type { RootStateType } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { cn } from "@/lib/utils";
 
 interface Props {
   product: ProductType | ProductDetailsType;
@@ -45,12 +46,12 @@ export const CheckoutButton = ({
   const style = {
     CARD: {
       size: "xs",
-      variant: "outline",
+      variant: "order",
       icon: <ClipboardCheck className="h-2 w-2" />,
     },
     DETAILS: {
       size: "lg",
-      variant: "outline",
+      variant: "order",
       icon: <ClipboardCheck className="h-4 w-4" />,
     },
   };
@@ -60,15 +61,15 @@ export const CheckoutButton = ({
       <Button
         onClick={handleCheckout}
         disabled={isLoading}
-        className="w-full border border-primary"
-        size="xs"
-        variant="outline">
+        variant="order"
+        className={cn("w-full")}
+        size="xs">
         {isLoading ? (
           <Spinner />
         ) : (
           <>
-            <ClipboardCheck className="h-4 w-4 hidden md:block text-primary" />
-            <span className="text-primary text-[10px]">Order now</span>
+            <ClipboardCheck className="h-4 w-4 hidden md:block text-white" />
+            <span className="text-white text-[10px]">Order now</span>
           </>
         )}
       </Button>
@@ -79,11 +80,9 @@ export const CheckoutButton = ({
     <Button
       onClick={handleCheckout}
       disabled={isLoading}
-      className="w-full border"
-      size={style[type].size as VariantProps<typeof buttonVariants>["size"]}
-      variant={
-        style[type].variant as VariantProps<typeof buttonVariants>["variant"]
-      }>
+      className="w-full"
+      variant="order"
+      size={style[type].size as VariantProps<typeof buttonVariants>["size"]}>
       {isLoading ? (
         <>
           <Spinner />

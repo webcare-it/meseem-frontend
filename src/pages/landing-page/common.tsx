@@ -145,7 +145,7 @@ export const BenefitsSection = ({ info }: Props) => {
 
   return (
     <div>
-      <Title>Benefits </Title>
+      <Title>{info?.short_description} </Title>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-4 items-baseline md:gap-6">
         {info?.feature_1 && renderHtml(info?.feature_1)}
         {info?.feature_2 && renderHtml(info?.feature_2)}
@@ -189,7 +189,7 @@ export const WhatOurCustomersSaySection = ({ info }: Props) => {
                 <OptimizedImage
                   src={img || ""}
                   alt={`Customer Review ${index + 1}`}
-                  className="w-full min-h-80 h-auto object-cover rounded-lg"
+                  className="w-full min-h-80 h-auto object-contain rounded-lg"
                 />
               </div>
             </SwiperSlide>
@@ -540,7 +540,7 @@ export const PriceTicker = ({ info }: Props) => {
               <div className="flex items-center gap-6">
                 <div className="relative">
                   <motion.div
-                    className="line-through text-gray-300 text-3xl font-bold"
+                    className="line-through text-gray-300 text-[28px] font-bold"
                     key={`original-${currentPriceIndex}`}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -603,7 +603,7 @@ export const PriceTicker = ({ info }: Props) => {
               <div className="flex items-center gap-6">
                 <div className="relative">
                   <motion.div
-                    className="text-white text-4xl font-extrabold"
+                    className="text-white text-[32px] font-extrabold"
                     key={`discounted-${currentPriceIndex}`}
                     initial={{ scale: 0.5, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}

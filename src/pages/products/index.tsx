@@ -58,7 +58,7 @@ export const ProductsPage = () => {
           <NoDataFound title={"No products found"} />
         )}
 
-        {Object.keys(paginationData)?.length > 0 && (
+        {Object.keys(paginationData)?.length > 0 && products?.length > 0 && (
           <PaginationWrapper
             paginationData={paginationData}
             onPageChange={handlePageChange}

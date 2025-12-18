@@ -129,13 +129,13 @@ export const ProductSuccess = ({
 
       <div className="w-full flex items-center justify-center gap-2">
         <div className="flex-1 w-full">
-          <Button variant="outline" className="w-full" onClick={onHideModal}>
+          <Button className="w-full" onClick={onHideModal}>
             {"Back to shopping"}
           </Button>
         </div>
         <div className="flex-1 w-full">
           <Link to="/checkout">
-            <Button variant="default" className="w-full" onClick={onHideModal}>
+            <Button variant="order" className="w-full" onClick={onHideModal}>
               Order now
             </Button>
           </Link>

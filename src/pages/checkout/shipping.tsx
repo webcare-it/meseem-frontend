@@ -136,7 +136,7 @@ export const ShippingCost = () => {
                 key={shipping?.id}
                 onClick={() => handleShippingSelect(shipping?.id?.toString())}
                 className={cn(
-                  "cursor-pointer py-2 md:py-3 transition-all duration-200 hover:shadow-md flex-1",
+                  "cursor-pointer py-2 md:py-3 transition-all duration-200 hover:shadow-md flex-1 min-w-xs",
                   selectedShipping === shipping?.id.toString()
                     ? "ring-2 ring-primary bg-primary/5"
                     : "hover:bg-gray-50",
