@@ -9,13 +9,13 @@ import {
   Search,
 } from "lucide-react";
 import { getImageUrl, slugify } from "@/helper";
-
 import { Input } from "@/components/ui/input";
 import type {
   CategoryType,
   SubCategoryType,
   SubSubCategoryType,
 } from "@/components/layout/header/useMenu";
+import { OptimizedImage } from "../common/optimized-image";
 
 interface Props {
   categories: CategoryType[];
@@ -52,27 +52,11 @@ const CategoryItem = ({ category, level }: CategoryItemProps) => {
           to={`/categories/${category?.id}/${slugify(category?.name)}`}
           className="flex-1 flex items-center gap-1">
           <div className="w-12 h-12 rounded overflow-hidden flex-shrink-0 bg-muted">
-            {category?.icon ? (
-              <img
-                src={getImageUrl(category.icon)}
-                alt={category.name}
-                className="w-full h-full object-cover"
-                loading="lazy"
-                onError={(e) => {
-                  e.currentTarget.style.display = "none";
-                  const fallback = e.currentTarget
-                    .nextElementSibling as HTMLElement;
-                  if (fallback) fallback.style.display = "flex";
-                }}
-              />
-            ) : null}
-            <div
-              className={`w-full h-full flex items-center justify-center ${
-                category?.icon ? "hidden" : "flex"
-              }`}
-              style={{ display: category?.icon ? "none" : "flex" }}>
-              <Image className="w-6 h-6 text-muted-foreground" />
-            </div>
+            <OptimizedImage
+              src={getImageUrl(category.icon)}
+              alt={category.name}
+              className="w-full h-full object-cover"
+            />
           </div>
 
           <div className="flex-1 min-w-0">

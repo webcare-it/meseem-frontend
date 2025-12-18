@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Minus, Image } from "lucide-react";
+import { Plus, Minus } from "lucide-react";
 import type { ProductType, StateSyncType } from "@/type";
-import { getImageUrl, slugify } from "@/helper";
+import { slugify } from "@/helper";
 import { WishlistButton } from "@/components/common/wishlist-button";
 import {
   useRemoveFromCart,
@@ -13,6 +13,7 @@ import {
 import { Link } from "react-router-dom";
 import { RemoveCartButton } from "@/components/common/cart-button";
 import { Quantity } from "@/components/card/quantity";
+import { OptimizedImage } from "@/components/common/optimized-image";
 
 interface Props {
   item: StateSyncType;
@@ -35,17 +36,12 @@ export const CartItem = ({ item }: Props) => {
     <Card className="p-1 md:p-3 border transition-shadow rounded-md md:rounded-lg">
       <div className="flex gap-4">
         <div className="flex-shrink-0 w-20 h-16 sm:w-24 sm:h-20 relative rounded-lg border overflow-hidden">
-          {item?.image ? (
-            <img
-              src={getImageUrl(item?.image)}
-              alt={item?.name}
-              className="absolute w-full h-full object-cover"
-            />
-          ) : (
-            <div className="absolute w-full h-full bg-muted-foreground/10 flex items-center justify-center">
-              <Image className="w-8 h-8 sm:w-10 sm:h-10" />
-            </div>
-          )}
+          <OptimizedImage
+            src={item?.image || ""}
+            alt={item?.name}
+            className="absolute w-full h-full object-cover"
+          />
+
           <WishlistButton
             product={item as unknown as ProductType}
             size="CART-BUTTON-SMALL"

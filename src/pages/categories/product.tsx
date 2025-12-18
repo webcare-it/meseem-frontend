@@ -3,21 +3,31 @@ import type { ProductType } from "@/type";
 import { useParams } from "react-router-dom";
 import { slugifyToTitle } from "@/helper";
 import { SeoWrapper } from "@/components/common/seo-wrapper";
-import { ProductsCard } from "@/components/card/products";
+import { ProductsSection } from "@/components/card/products-section";
+import type { PaginationDataType } from "@/components/common/pagination-wrapper";
+import { useState } from "react";
 
 export const CategoriesProductPage = () => {
   const { id, name } = useParams();
-  const { data, isLoading } = useGetProductsByCategory(id as string);
+  const [filters, setFilters] = useState<Record<string, unknown>>({ page: 1 });
+  const { data, isLoading } = useGetProductsByCategory(id as string, filters);
 
   const products = (data?.data as ProductType[]) || [];
+  const paginationData = (data as { meta: PaginationDataType })?.meta || {};
+
+  const handlePageChange = (page: number) => {
+    setFilters((prev) => ({ ...prev, page }));
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
-      <SeoWrapper title={slugifyToTitle(name as string)} />
-
-      <ProductsCard
+      <SeoWrapper title={slugifyToTitle(name as string)} />j
+      <ProductsSection
         title={slugifyToTitle(name as string)}
         products={products}
+        pagination={paginationData}
+        onPageChange={handlePageChange}
         isLoading={isLoading}
       />
     </>
@@ -26,17 +36,29 @@ export const CategoriesProductPage = () => {
 
 export const CategoriesSubCategoryProductPage = () => {
   const { subId, subName } = useParams();
-  const { data, isLoading } = useGetProductsByCategory(subId as string);
+  const [filters, setFilters] = useState<Record<string, unknown>>({ page: 1 });
+  const { data, isLoading } = useGetProductsByCategory(
+    subId as string,
+    filters
+  );
 
   const products = (data?.data as ProductType[]) || [];
+  const paginationData = (data as { meta: PaginationDataType })?.meta || {};
+
+  const handlePageChange = (page: number) => {
+    setFilters((prev) => ({ ...prev, page }));
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
       <SeoWrapper title={slugifyToTitle(subName as string)} />
 
-      <ProductsCard
+      <ProductsSection
         title={slugifyToTitle(subName as string)}
         products={products}
+        pagination={paginationData}
+        onPageChange={handlePageChange}
         isLoading={isLoading}
       />
     </>
@@ -45,17 +67,29 @@ export const CategoriesSubCategoryProductPage = () => {
 
 export const CategoriesSubSubCategoryProductPage = () => {
   const { subSubId, subSubName } = useParams();
-  const { data, isLoading } = useGetProductsByCategory(subSubId as string);
+  const [filters, setFilters] = useState<Record<string, unknown>>({ page: 1 });
+  const { data, isLoading } = useGetProductsByCategory(
+    subSubId as string,
+    filters
+  );
 
   const products = (data?.data as ProductType[]) || [];
+  const paginationData = (data as { meta: PaginationDataType })?.meta || {};
+
+  const handlePageChange = (page: number) => {
+    setFilters((prev) => ({ ...prev, page }));
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
       <SeoWrapper title={slugifyToTitle(subSubName as string)} />
 
-      <ProductsCard
+      <ProductsSection
         title={slugifyToTitle(subSubName as string)}
         products={products}
+        pagination={paginationData}
+        onPageChange={handlePageChange}
         isLoading={isLoading}
       />
     </>

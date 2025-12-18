@@ -1,4 +1,5 @@
-import { getConfig, getImageUrl } from "@/helper";
+import { OptimizedImage } from "@/components/common/optimized-image";
+import { getConfig } from "@/helper";
 import { useConfig } from "@/hooks/useConfig";
 
 export const BottomBar = () => {
@@ -12,9 +13,9 @@ export const BottomBar = () => {
     <div className="flex flex-col-reverse md:flex-row items-center md:py-4 mt-4 md:mt-0 justify-between gap-4 text-sm">
       <p className="text-white">© {copyright}</p>
       <div className="w-full max-w-sm h-10 relative overflow-hidden">
-        <img
+        <OptimizedImage
           className="absolute w-full h-full object-contain"
-          src={img ? getImageUrl(img as string) : "/placeholder.svg"}
+          src={img || ""}
           alt="payment image"
         />
       </div>

@@ -2,9 +2,18 @@ import path from "path";
 import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react-swc";
+import Sitemap from "vite-plugin-sitemap";
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    Sitemap({
+      hostname: "https://meseem.com/",
+      dynamicRoutes: ["/", "/products", "/categories"],
+      priority: 1,
+    }),
+  ],
 
   resolve: {
     alias: {
@@ -23,15 +32,12 @@ export default defineConfig({
             "react-router-dom",
             "react-helmet-async",
           ],
-
           state: ["@reduxjs/toolkit", "react-redux", "redux-state-sync"],
-
           tanstack: ["@tanstack/react-query"],
           axios: ["axios"],
           motion: ["framer-motion"],
           icons: ["lucide-react"],
           swiper: ["swiper"],
-
           radix: [
             "@radix-ui/react-avatar",
             "@radix-ui/react-checkbox",
@@ -44,7 +50,6 @@ export default defineConfig({
             "@radix-ui/react-tabs",
             "@radix-ui/react-tooltip",
           ],
-
           utils: [
             "clsx",
             "tailwind-merge",

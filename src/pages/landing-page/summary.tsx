@@ -3,7 +3,7 @@ import { Separator } from "@/components/ui/separator";
 import { useGetCampaignSummaryQuery } from "@/api/queries/useGetCart";
 import { useSelector } from "react-redux";
 import type { RootStateType } from "@/redux/store";
-import { getConfig, getImageUrl } from "@/helper";
+import { getConfig } from "@/helper";
 import { useConfig } from "@/hooks/useConfig";
 import { cn } from "@/lib/utils";
 import { Coupon } from "@/components/card/coupon";
@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 import { useCampaignRemoveCart } from "@/controllers/campaignController";
 import type { StateSyncType } from "@/type";
+import { OptimizedImage } from "@/components/common/optimized-image";
 
 interface CartSummaryType {
   sub_total: string;
@@ -51,12 +52,8 @@ export const CampaignCartSummary = ({ children }: Props) => {
               className="flex justify-between items-center border-b pb-2">
               <div className="flex gap-1">
                 <div className="flex-shrink-0 w-20 h-16 sm:w-24 sm:h-20 relative rounded-lg border overflow-hidden">
-                  <img
-                    src={
-                      item?.image
-                        ? getImageUrl(item?.image)
-                        : "/placeholder.svg"
-                    }
+                  <OptimizedImage
+                    src={item?.image || ""}
                     alt={item?.name}
                     className="absolute w-full h-full object-cover"
                   />
@@ -133,7 +130,7 @@ export const CampaignCartSummary = ({ children }: Props) => {
 
       <div className="flex justify-between text-lg font-bold">
         <span>Total Amount</span>
-        <span>{cartSummary?.grand_total || " ৳00.00"}</span>
+        <span>{cartSummary?.grand_total || "৳00.00"}</span>
       </div>
 
       {children}

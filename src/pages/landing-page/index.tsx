@@ -22,7 +22,6 @@ import type { LandingPageType } from "./type";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { LandingSkeleton } from "./skeleton";
-
 import { GtmSeo } from "./gtm";
 import { useEffect } from "react";
 import { removeLocalStorage } from "@/helper";

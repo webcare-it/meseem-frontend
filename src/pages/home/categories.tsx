@@ -5,12 +5,10 @@ import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Navigation, Pagination, Autoplay } from "swiper/modules";
 import { slugify } from "@/helper";
-import { Image } from "lucide-react";
 import { Skeleton } from "@/components/common/skeleton";
 import { useCategories } from "@/api/queries/useCategories";
 import { Link } from "react-router-dom";
 import type { CategoryType } from "@/type";
-
 import { OptimizedImage } from "@/components/common/optimized-image";
 
 const CategorySkeleton = () => (
@@ -86,17 +84,11 @@ export const CategoriesSection = () => {
                   className="flex flex-col items-center px-1 mx-1 sm:px-2 sm:mx-2 min-w-fit sm:min-w-0 group"
                   aria-label={`Explore ${category?.name}`}>
                   <div className="w-20 h-16 sm:w-24 sm:h-20 md:w-28 md:h-24 rounded-lg bg-primary/10 flex items-center justify-center overflow-hidden shadow-md group-hover:bg-primary/20 transition-colors duration-300 relative p-1 sm:p-2 select-none">
-                    {category?.icon ? (
-                      <OptimizedImage
-                        src={category?.icon}
-                        alt={category?.name}
-                        className="w-full h-full object-contain absolute"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-primary/10 flex items-center justify-center">
-                        <Image className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-primary" />
-                      </div>
-                    )}
+                    <OptimizedImage
+                      src={category?.icon || ""}
+                      alt={category?.name}
+                      className="w-full h-full object-contain absolute"
+                    />
                   </div>
                   <span className="mt-1 sm:mt-2 text-xs font-medium text-foreground group-hover:text-primary text-center w-20 sm:w-24 md:w-28 line-clamp-1 transition-all duration-300 group-hover:underline">
                     {category?.name}

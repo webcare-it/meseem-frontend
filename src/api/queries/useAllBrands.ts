@@ -18,7 +18,7 @@ export const useGetTopBrands = (): QueryType => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["get_top_brands"],
     queryFn: async () => {
-      await new Promise((resolve) => setTimeout(resolve, 8000));
+      await new Promise((resolve) => setTimeout(resolve, 6000));
       const response = await apiClient.get(`/brands/top`);
       return response.data;
     },

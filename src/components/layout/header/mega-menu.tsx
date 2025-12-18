@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { isPathActive } from "@/helper";
 import { Skeleton } from "@/components/common/skeleton";
+import { OptimizedImage } from "@/components/common/optimized-image";
 
 type Props = React.ComponentPropsWithoutRef<"li"> & {
   href: string;
@@ -231,7 +232,7 @@ export const MegaMenu = () => {
                                               className="block group">
                                               <div className="w-80 h-48 object-cover relative overflow-hidden rounded-lg">
                                                 {promo?.image ? (
-                                                  <img
+                                                  <OptimizedImage
                                                     src={promo?.image}
                                                     alt={promo?.title}
                                                     className="absolute top-0 left-0 w-full h-full object-cover transition-transform group-hover:scale-105"

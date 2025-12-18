@@ -5,14 +5,26 @@ import { CardLayout } from "@/components/common/card-layout";
 import { ProductCard, ProductCardSkeleton } from "@/components/card/product";
 import { AnimationWrapper } from "@/components/common/animation-wrapper";
 import { NoDataFound } from "@/components/common/no-data-found";
+import {
+  PaginationWrapper,
+  type PaginationDataType,
+} from "../common/pagination-wrapper";
 
 interface Props {
   title: string;
   products: ProductType[];
   isLoading: boolean;
+  pagination: PaginationDataType;
+  onPageChange: (page: number) => void;
 }
 
-export const ProductsCard = ({ title, products, isLoading }: Props) => {
+export const ProductsSection = ({
+  title,
+  products,
+  isLoading,
+  pagination,
+  onPageChange,
+}: Props) => {
   return (
     <BaseLayout>
       <section className="mb-10 md:mb-20 container mx-auto mt-10">
@@ -39,6 +51,13 @@ export const ProductsCard = ({ title, products, isLoading }: Props) => {
             </div>
           )}
         </CardLayout>
+
+        {Object.keys(pagination)?.length > 0 && (
+          <PaginationWrapper
+            paginationData={pagination}
+            onPageChange={onPageChange}
+          />
+        )}
       </section>
     </BaseLayout>
   );

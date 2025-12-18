@@ -1,7 +1,7 @@
-import { CheckCircle, Image } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import type { ProductType } from "@/type";
 import { Skeleton } from "../common/skeleton";
-import { getImageUrl, slugify } from "@/helper";
+import { slugify } from "@/helper";
 import { Link } from "react-router";
 import { CartButton } from "../common/cart-button";
 import { WishlistButton } from "../common/wishlist-button";
@@ -29,17 +29,11 @@ export const ProductCard = ({ product }: Props) => {
 
         <Link to={`/products/${product?.id}/${slugify(product?.name)}`}>
           <div className="relative aspect-[16/12] overflow-hidden bg-muted">
-            {product?.thumbnail_image ? (
-              <OptimizedImage
-                src={product?.thumbnail_image}
-                alt={product?.name}
-                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            ) : (
-              <div className="w-full absolute h-full bg-muted flex items-center justify-center">
-                <Image className="w-20 h-20 text-muted-foreground" />
-              </div>
-            )}
+            <OptimizedImage
+              src={product?.thumbnail_image || ""}
+              alt={product?.name}
+              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
           </div>
         </Link>
 
@@ -116,12 +110,8 @@ export const ProductSuccess = ({
       </div>
       <div className="flex items-start justify-center gap-2">
         <div className="size-16 relative overflow-hidden rounded-lg bg-cover bg-center border border-border">
-          <img
-            src={
-              product?.thumbnail_image
-                ? getImageUrl(product?.thumbnail_image)
-                : "/placeholder.svg"
-            }
+          <OptimizedImage
+            src={product?.thumbnail_image || ""}
             alt={product?.name}
             className="w-full h-full object-cover relative"
           />
@@ -146,7 +136,7 @@ export const ProductSuccess = ({
         <div className="flex-1 w-full">
           <Link to="/checkout">
             <Button variant="default" className="w-full" onClick={onHideModal}>
-              {"Checkout"}
+              Order now
             </Button>
           </Link>
         </div>

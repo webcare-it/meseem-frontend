@@ -9,7 +9,6 @@ import { ProductTabs } from "@/pages/details/tabs";
 import { useNavigate, useParams } from "react-router-dom";
 import { ProductDetailsSeo } from "./seo";
 import { ProductInfo } from "./info";
-
 import { getImageUrl } from "@/helper";
 import { ImageGallery } from "@/components/common/image-gallery";
 import { useState } from "react";

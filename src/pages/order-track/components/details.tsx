@@ -1,7 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
-import { getImageUrl } from "@/helper";
 import { Link } from "react-router-dom";
 import { slugify } from "@/helper";
 import type { OrderDataType } from "./utils";
@@ -9,6 +8,7 @@ import type { OrderDataType } from "./utils";
 import { Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TooltipWrapper } from "@/components/common/tooltip-wrapper";
+import { OptimizedImage } from "@/components/common/optimized-image";
 
 export const OrderTrackDetails = ({
   orderData,
@@ -39,11 +39,8 @@ export const OrderTrackDetails = ({
                   }}
                   className="flex gap-4 pb-4 border-b last:border-0">
                   <div className="relative size-20 md:size-24 rounded-lg overflow-hidden bg-muted flex-shrink-0 border border-border">
-                    <img
-                      src={
-                        getImageUrl(item?.product_thumbnail_image) ||
-                        "/placeholder.svg"
-                      }
+                    <OptimizedImage
+                      src={item?.product_thumbnail_image || ""}
                       alt={item?.product_name}
                       className="w-full h-full object-cover rounded-lg absolute"
                     />

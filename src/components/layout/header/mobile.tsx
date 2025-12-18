@@ -20,6 +20,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { isPathActive } from "@/helper";
 
 export const HeaderMobile = () => {
+  const pathname = useLocation();
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
@@ -72,7 +73,11 @@ export const HeaderMobile = () => {
                 <Link
                   to="/track-order"
                   className="p-1 hover:bg-accent rounded-md transition-colors">
-                  <Truck className="h-5 w-5 text-muted-foreground" />
+                  <Truck
+                    className={`hover:text-primary h-5 w-5 text-muted-foreground ${
+                      pathname.pathname === "/track-order" ? "text-primary" : ""
+                    }`}
+                  />
                 </Link>
               </div>
             </motion.div>
@@ -137,7 +142,12 @@ export const FooterMobile = () => {
             <div className="bg-primary border-2 border-white rounded-full p-2 -mt-8 mb-1">
               <Handbag className="h-8 w-8 text-white" />
             </div>
-            <span className="text-[10px] text-foreground font-medium">
+            <span
+              className={`text-[10px] text-foreground font-medium ${
+                isPathActive(location.pathname, "/cart")
+                  ? "text-primary"
+                  : "text-foreground"
+              }`}>
               {"Cart"} ({cart?.length})
             </span>
           </Link>

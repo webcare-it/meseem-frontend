@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Title } from "./common";
 import { CheckoutForm } from "../checkout/form";
-
 import { Spinner } from "@/components/ui/spinner";
 import { CreditCard } from "lucide-react";
 import { useCheckoutController } from "@/controllers/checkoutController";

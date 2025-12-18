@@ -17,7 +17,7 @@ export const ProductsPage = () => {
   const { data, isLoading } = useGetAllProducts(filters);
 
   const products = (data?.data as ProductType[]) || [];
-  const paginationData = (data as { meta: PaginationDataType })?.meta;
+  const paginationData = (data as { meta: PaginationDataType })?.meta || {};
 
   const handlePageChange = (page: number) => {
     setFilters((prev) => ({ ...prev, page }));
@@ -58,7 +58,7 @@ export const ProductsPage = () => {
           <NoDataFound title={"No products found"} />
         )}
 
-        {paginationData && (
+        {Object.keys(paginationData)?.length > 0 && (
           <PaginationWrapper
             paginationData={paginationData}
             onPageChange={handlePageChange}

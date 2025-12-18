@@ -285,6 +285,7 @@ export const VideoSection = ({ info }: Props) => {
 
 export const DateCounter = ({ date }: { date: string }) => {
   const targetDate = new Date(date).getTime();
+
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -311,6 +312,10 @@ export const DateCounter = ({ date }: { date: string }) => {
 
     return () => clearInterval(timer);
   }, [targetDate]);
+
+  if (targetDate < Date.now()) {
+    return null;
+  }
 
   return (
     <div className="flex flex-col items-center">

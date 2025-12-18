@@ -4,10 +4,10 @@ import { ContactFooter } from "./contact";
 import { CategoriesFooter } from "./categories";
 import { BrandFooter } from "./brand";
 import { AboutUsFooter } from "./about";
-import { getConfig, getImageUrl } from "@/helper";
+import { getConfig } from "@/helper";
 import { useConfig } from "@/hooks/useConfig";
-import { Image } from "lucide-react";
 import { SubscribeFooter } from "./subscribe";
+import { OptimizedImage } from "@/components/common/optimized-image";
 
 export const Footer = ({
   isShowNewsletterSection,
@@ -27,17 +27,11 @@ export const Footer = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
             <div className="flex flex-col gap-3">
               <div className="w-full h-20 relative overflow-hidden">
-                {logo?.length > 0 ? (
-                  <img
-                    className="absolute w-full h-full object-contain"
-                    src={getImageUrl(logo as string)}
-                    alt="logo"
-                  />
-                ) : (
-                  <div className="absolute w-full h-full flex items-center justify-center">
-                    <Image className="w-6 h-6 text-primary" />
-                  </div>
-                )}
+                <OptimizedImage
+                  className="absolute w-full h-full object-contain"
+                  src={logo || ""}
+                  alt="logo"
+                />
               </div>
               {description && (
                 <div dangerouslySetInnerHTML={{ __html: description }} />

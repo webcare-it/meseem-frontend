@@ -1,14 +1,15 @@
 import { useSelector } from "react-redux";
 import type { RootStateType } from "@/redux/store";
-import { Heart, Image } from "lucide-react";
+import { Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { WishlistButton } from "@/components/common/wishlist-button";
 import { CartButton } from "@/components/common/cart-button";
-import { getImageUrl, slugify } from "@/helper";
+import { slugify } from "@/helper";
 import type { ProductType } from "@/type";
+import { OptimizedImage } from "@/components/common/optimized-image";
 
 export const WishlistItems = () => {
   const wishlist = useSelector((state: RootStateType) => state.wishlist);
@@ -33,17 +34,11 @@ export const WishlistItems = () => {
             <Card key={item.id} className="p-1 md:p-4 border rounded-lg">
               <div className="flex gap-4">
                 <div className="flex-shrink-0 w-20 h-16 relative rounded-lg border overflow-hidden">
-                  {item?.image ? (
-                    <img
-                      src={getImageUrl(item?.image)}
-                      alt={item?.name}
-                      className="absolute w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="absolute w-full h-full bg-muted-foreground/10 flex items-center justify-center">
-                      <Image className="w-8 h-8" />
-                    </div>
-                  )}
+                  <OptimizedImage
+                    src={item?.image || ""}
+                    alt={item?.name}
+                    className="absolute w-full h-full object-cover"
+                  />
                 </div>
 
                 <div className="flex-1 min-w-0">

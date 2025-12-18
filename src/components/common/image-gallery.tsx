@@ -6,6 +6,7 @@ import type { ProductDetailsType, ProductType } from "@/type";
 import { WishlistButton } from "./wishlist-button";
 import { Discount } from "./discount";
 import { getImageUrl } from "@/helper";
+import { OptimizedImage } from "./optimized-image";
 
 interface Props {
   className?: string;
@@ -136,8 +137,8 @@ export const ImageGallery = ({ img, product, className }: Props) => {
                         ? "border-primary"
                         : "border-accent/20 hover:border-accent/50"
                     }`}>
-                    <img
-                      src={image || "/placeholder.svg"}
+                    <OptimizedImage
+                      src={image || ""}
                       alt={`Image ${index + 1}`}
                       className="w-full h-full object-cover"
                     />

@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { getConfig, getImageUrl } from "@/helper";
-import { Image } from "lucide-react";
 import { useConfig } from "@/hooks/useConfig";
 
 interface Props {
@@ -15,17 +14,14 @@ export const Logo = ({ type }: Props) => {
     return (
       <Link to="/">
         <div className="w-40 h-12 relative overflow-hidden">
-          {logo ? (
-            <img
-              src={getImageUrl(logo as string)}
-              alt="logo"
-              className="absolute w-full h-full object-contain"
-            />
-          ) : (
-            <div className="absolute w-full h-full flex items-center justify-center">
-              <Image className="w-6 h-6 text-primary" />
-            </div>
-          )}
+          <img
+            src={getImageUrl(logo as string)}
+            alt="logo"
+            onError={(e) => {
+              e.currentTarget.src = "/placeholder.svg";
+            }}
+            className="absolute w-full h-full object-contain"
+          />
         </div>
       </Link>
     );
@@ -34,17 +30,14 @@ export const Logo = ({ type }: Props) => {
   if (type === "LANDING-PAGE") {
     return (
       <Link to="/">
-        {logo ? (
-          <img
-            src={getImageUrl(logo as string)}
-            alt="logo"
-            className="w-full h-20 object-contain"
-          />
-        ) : (
-          <div className="absolute w-full h-full flex items-center justify-center">
-            <Image className="w-6 h-6 text-primary" />
-          </div>
-        )}
+        <img
+          src={getImageUrl(logo as string)}
+          alt="logo"
+          onError={(e) => {
+            e.currentTarget.src = "/placeholder.svg";
+          }}
+          className="w-full h-20 object-contain"
+        />
       </Link>
     );
   }
@@ -53,17 +46,14 @@ export const Logo = ({ type }: Props) => {
     return (
       <Link to="/">
         <div className="w-28 h-10 relative overflow-hidden">
-          {logo ? (
-            <img
-              src={getImageUrl(logo as string)}
-              alt="logo"
-              className="absolute w-full h-full object-contain"
-            />
-          ) : (
-            <div className="absolute w-full h-full flex items-center justify-center">
-              <Image className="w-6 h-6 text-primary" />
-            </div>
-          )}
+          <img
+            src={getImageUrl(logo as string)}
+            alt="logo"
+            onError={(e) => {
+              e.currentTarget.src = "/placeholder.svg";
+            }}
+            className="absolute w-full h-full object-contain"
+          />
         </div>
       </Link>
     );

@@ -6,7 +6,7 @@ export const useSearchSuggestion = (): QueryType => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["get_search_suggestion"],
     queryFn: async () => {
-      await new Promise((resolve) => setTimeout(resolve, 4000));
+      await new Promise((resolve) => setTimeout(resolve, 3000));
       const response = await apiClient.get("/get-search-suggestions");
       return response.data;
     },

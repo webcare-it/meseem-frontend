@@ -5,12 +5,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Contact, Eye, MapPin } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { Link } from "react-router-dom";
-import { getImageUrl, keyToValue, slugify } from "@/helper";
+import { keyToValue, slugify } from "@/helper";
 
 import { Skeleton } from "../common/skeleton";
 import { NoDataFound } from "../common/no-data-found";
 import { TooltipWrapper } from "../common/tooltip-wrapper";
 import { Button } from "../ui/button";
+import { OptimizedImage } from "../common/optimized-image";
 
 export const OrderDetailsCard = ({
   order,
@@ -67,11 +68,8 @@ export const OrderDetailsCard = ({
                   className="flex gap-4 border-b pb-0.5 last:border-b-0"
                   key={index}>
                   <div className="w-16 h-16 md:w-20 md:h-20 relative rounded-lg flex overflow-hidden items-center justify-center">
-                    <img
-                      src={
-                        getImageUrl(item?.product_thumbnail_image) ||
-                        "/placeholder.svg"
-                      }
+                    <OptimizedImage
+                      src={item?.product_thumbnail_image || ""}
                       className="absolute w-full h-full object-cover"
                       alt={item?.product_name}
                     />

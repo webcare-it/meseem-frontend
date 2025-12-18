@@ -67,12 +67,18 @@ export const MagnifyImage = ({
         ref={sourceRef}
         src={src}
         alt={alt}
+        onError={(e) => {
+          e.currentTarget.src = "/placeholder.svg";
+        }}
         className={cn("w-full h-full rounded-xl", className)}
       />
 
       <img
         src={src}
         alt={alt}
+        onError={(e) => {
+          e.currentTarget.src = "/placeholder.svg";
+        }}
         className={cn(
           "absolute pointer-events-none aspect-[16/17] transition-opacity duration-200 ease-in-out",
           "rounded-xl",

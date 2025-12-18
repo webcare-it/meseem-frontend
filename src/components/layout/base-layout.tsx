@@ -51,7 +51,7 @@ const BaseLayoutContent = ({
   );
 
   return (
-    <main className="min-h-screen flex flex-col">
+    <section className="min-h-screen flex flex-col">
       {headerContent}
 
       <section
@@ -66,7 +66,7 @@ const BaseLayoutContent = ({
       </footer>
 
       <ScrollToTop />
-    </main>
+    </section>
   );
 };
 

@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/common/skeleton";
+import { OptimizedImage } from "@/components/common/optimized-image";
 
 interface PaymentMethodType {
   payment_type: string;
@@ -77,17 +78,12 @@ export const PaymentMethods = () => {
 
                     <div className="flex items-center gap-3 flex-1">
                       <div className="flex items-center gap-2 md:gap-3">
-                        {payment?.image ? (
-                          <img
-                            src={payment.image}
-                            alt={payment.name}
-                            className="w-8 h-8 object-contain"
-                          />
-                        ) : (
-                          <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
-                            <CreditCard className="md:size-5 size-4 text-accent" />
-                          </div>
-                        )}
+                        <OptimizedImage
+                          src={payment?.image || ""}
+                          alt={payment.name}
+                          className="w-8 h-8 object-contain"
+                        />
+
                         <h4 className="text-sm md:text-base font-medium text-foreground">
                           {payment?.title || payment?.name}
                         </h4>
