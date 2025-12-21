@@ -65,13 +65,17 @@ export const ProductSection = ({ info }: Props) => {
 
   return (
     <section id="order-section" ref={ref}>
-      <Title>Choose Your Favorite Products</Title>
+      {products?.length > 0 ? (
+        <>
+          <Title>Choose Your Favorite Products</Title>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {products?.map((product) => (
-          <SingleProduct key={product.id} product={product} />
-        ))}
-      </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {products?.map((product) => (
+              <SingleProduct key={product.id} product={product} />
+            ))}
+          </div>
+        </>
+      ) : null}
     </section>
   );
 };

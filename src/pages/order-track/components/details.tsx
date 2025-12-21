@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { slugify } from "@/helper";
 import type { OrderDataType } from "./utils";
-
 import { Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TooltipWrapper } from "@/components/common/tooltip-wrapper";

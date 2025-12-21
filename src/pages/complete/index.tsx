@@ -3,7 +3,6 @@ import { BaseLayout } from "@/components/layout/base-layout";
 import { Skeleton } from "@/components/common/skeleton";
 import { CheckCircle, AlertCircle } from "lucide-react";
 import { motion } from "framer-motion";
-
 import { useGetOrderSuccessful } from "@/api/queries/userOrders";
 import type { InvoiceType } from "@/type";
 import {

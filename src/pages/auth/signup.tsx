@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import {
   Card,
@@ -9,7 +8,6 @@ import {
 } from "@/components/ui/card";
 import { SeoWrapper } from "@/components/common/seo-wrapper";
 import { SignUpForm } from "./component/form";
-import { Logo } from "@/components/layout/header/logo";
 import { AuthDescription } from "./component/description";
 import { BaseLayout } from "@/components/layout/base-layout";
 
@@ -23,10 +21,7 @@ export const SignUpPage = () => {
             <div className={cn("flex flex-col gap-6")}>
               <Card className="mx-4 md:mx-0">
                 <CardHeader className="flex gap-2 flex-col items-center justify-center">
-                  <Link to="/" className="mt-4">
-                    <Logo type="DESKTOP" />
-                  </Link>
-                  <div className="text-center">
+                  <div className="text-center mt-4">
                     <CardTitle className="text-xl">Welcome</CardTitle>
                     <CardDescription>Sign up to your account</CardDescription>
                   </div>

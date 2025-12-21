@@ -67,6 +67,7 @@ export const ProductCard = ({ product }: Props) => {
             <div className="flex-1 w-full">
               <CheckoutButton
                 type="SLIDER"
+                onShowModal={onShowModal}
                 product={product as ProductType}
                 quantity={1}
               />

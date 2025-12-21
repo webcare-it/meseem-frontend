@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import {
   Card,
@@ -8,7 +8,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { SeoWrapper } from "@/components/common/seo-wrapper";
-import { Logo } from "@/components/layout/header/logo";
 import { AuthDescription } from "./component/description";
 import {
   InputOTP,
@@ -162,10 +161,7 @@ export const ForgotPasswordPage = () => {
             <div className={cn("flex flex-col gap-4 md:gap-6")}>
               <Card className="p-4 mx-4 md:mx-0">
                 <CardHeader className="flex gap-2 flex-col items-center justify-center">
-                  <Link to="/">
-                    <Logo type="DESKTOP" />
-                  </Link>
-                  <div className="text-center">
+                  <div className="text-center mt-4">
                     <CardTitle className="text-xl">{titleText}</CardTitle>
                     <CardDescription className="mt-2 md:mt-3">
                       {descriptionText}

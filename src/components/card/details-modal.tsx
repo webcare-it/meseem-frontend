@@ -106,6 +106,7 @@ export const DetailsModal = ({ id, onShowModal }: Props) => {
               type="DETAILS"
               product={product as unknown as ProductType}
               quantity={quantity}
+              onShowModal={onShowModal}
               variant={getVariant(
                 selectedColor,
                 selectedSize,

@@ -146,7 +146,7 @@ export const VariantCard = ({
         getUniqueColors(product).length > 0 && (
           <div className="flex items-center gap-2">
             <span className="text-sm font-medium">{"Colors"}:</span>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center flex-wrap gap-2">
               {getUniqueColors(product)?.map((color) => {
                 return (
                   <button

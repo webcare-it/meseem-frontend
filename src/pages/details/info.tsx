@@ -108,6 +108,7 @@ export const ProductInfo = ({ product, onVariantImageChange }: Props) => {
             type="DETAILS"
             product={product as unknown as ProductType}
             quantity={quantity}
+            onShowModal={onShowModal}
             variant={getVariant(selectedColor, selectedSize, product?.variants)}
           />
         </div>
