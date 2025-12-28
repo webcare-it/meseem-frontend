@@ -22,7 +22,7 @@ export const CategoriesProductPage = () => {
 
   return (
     <>
-      <SeoWrapper title={slugifyToTitle(name as string)} />j
+      <SeoWrapper title={slugifyToTitle(name as string)} />
       <ProductsSection
         title={slugifyToTitle(name as string)}
         products={products}
