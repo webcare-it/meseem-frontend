@@ -6,4 +6,4 @@ Disallow: /cart/
 Disallow: /checkout/
 Disallow: /search?
 
-Sitemap: https://tsbbazar.com/sitemap.xml  
+Sitemap: https://meseem.com/sitemap.xml  
