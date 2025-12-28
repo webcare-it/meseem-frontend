@@ -15,15 +15,17 @@ import { CampaignCartSummary } from "./summary";
 export const OrdersSection = () => {
   const {
     otp,
-    setOtp,
     info,
+    setOtp,
     setInfo,
     isPending,
     otpLoading,
     isActiveOtp,
     showOtpModal,
+    selectedShipping,
     handlePlaceOrder,
     handleOtpSuccess,
+    setSelectedShipping,
   } = useCheckoutController();
 
   return (
@@ -42,7 +44,10 @@ export const OrdersSection = () => {
                 {"Shipping Information"}
               </h3>
               <CheckoutForm info={info} setInfo={setInfo} />
-              <ShippingCost />
+              <ShippingCost
+                selectedShipping={selectedShipping}
+                setSelectedShipping={setSelectedShipping}
+              />
               <PaymentMethods />
             </Card>
           </motion.div>
@@ -52,7 +57,7 @@ export const OrdersSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}>
-            <CampaignCartSummary>
+            <CampaignCartSummary setSelectedShipping={setSelectedShipping}>
               <Button
                 className="w-full"
                 size="lg"

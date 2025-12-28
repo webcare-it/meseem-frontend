@@ -5,7 +5,6 @@ import {
 import {
   getGuestUserId,
   getSelectedPaymentMethod,
-  getSelectedShippingMethod,
   getUserId,
   getConfig,
   removeLocalStorage,
@@ -37,20 +36,21 @@ export const useCheckoutController = () => {
   const [otp, setOtp] = useState<string>("");
   const [info, setInfo] = useState<InfoType>(_init);
   const [showOtpModal, setShowOtpModal] = useState(false);
-  const [orderFormData, setOrderFormData] = useState<FormData | null>(null);
+  const [selectedShipping, setSelectedShipping] = useState<string>("");
   const isActiveOtp = getConfig(config, "otp_for_order")?.value === "1";
+  const [orderFormData, setOrderFormData] = useState<FormData | null>(null);
 
   const { validateBangladeshiPhone } = usePhoneValidation();
   const { mutate: otpHook, isPending } = useSendOrderOtpMutation();
   const { mutate, isPending: checkoutLoading } = useCheckoutMutation();
 
   const clearFun = () => {
+    setSelectedShipping("");
     revalidateQueryFn("get_cart");
     revalidateQueryFn("get_cart_summary");
     dispatch(clearCartFn());
     removeLocalStorage("last_order_code");
     removeLocalStorage("selected_payment_method");
-    removeLocalStorage("selected_shipping_method");
   };
 
   const handlePlaceOrder = () => {
@@ -61,8 +61,8 @@ export const useCheckoutController = () => {
       return;
     }
     formData.append("payment_type", paymentType);
-    const shippingId = getSelectedShippingMethod();
-    if (shippingId === "") {
+
+    if (selectedShipping === "") {
       toast.error("Please select a shipping method");
       return;
     }
@@ -115,6 +115,7 @@ export const useCheckoutController = () => {
           if (res?.result) {
             toast.success(res?.message || "Order placed successfully");
             clearFun();
+            removeLocalStorage("phone_for_otp");
             if (res?.combined_order_id) {
               navigate(`/orders/details/${res?.combined_order_id}`);
             }
@@ -165,6 +166,8 @@ export const useCheckoutController = () => {
     otpLoading: isPending,
     isActiveOtp,
     showOtpModal,
+    selectedShipping,
+    setSelectedShipping,
     setShowOtpModal,
     handlePlaceOrder,
     handleOtpSuccess,

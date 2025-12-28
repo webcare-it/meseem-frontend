@@ -101,8 +101,9 @@ export const CartSummary = ({
         </div>
         <div className="flex justify-between">
           <span className="text-muted-foreground">{"Shipping Cost"}:</span>
+
           <span className="font-medium">
-            {cartSummary?.shipping_cost || " ৳00.00"}
+            {cartSummary?.shipping_cost || "৳00.00"}
           </span>
         </div>
         <div className="flex justify-between">

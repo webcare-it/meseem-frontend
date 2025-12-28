@@ -48,7 +48,7 @@ export const GtmSeo = ({ info }: { info: LandingPageType }) => {
         content={truncateText(info?.sub_title || "")}
         title={info?.name}
       />
-      {/* <meta name="keywords" content={info?.tags?.join(", ")} /> */}
+
       <meta property="og:image" content={getImageUrl(img)} />
       <meta property="og:title" content={info?.title} />
       <meta

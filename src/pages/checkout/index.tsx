@@ -20,29 +20,31 @@ import { OrderConfirmOtp } from "@/components/common/checkout-otp";
 
 export const CheckoutPage = () => {
   const { startCheckoutTracker } = useGtmTracker();
-  const cart = useSelector((state: RootStateType) => state.cart);
+  const cart = useSelector((state: RootStateType) => state.cart?.items);
   const {
     otp,
-    setOtp,
     info,
+    setOtp,
     setInfo,
     isPending,
     otpLoading,
     isActiveOtp,
     showOtpModal,
+    selectedShipping,
     handlePlaceOrder,
     handleOtpSuccess,
+    setSelectedShipping,
   } = useCheckoutController();
 
   useEffect(() => {
-    if (cart?.items?.length > 0 && !getCookie("checkout_begin")) {
+    if (cart?.length > 0 && !getCookie("checkout_begin")) {
       setCookie("checkout_begin", "checkout_begin");
 
       const trackerData: PurchaseTrackerType = {
         transaction_id: Math.random().toString(36).substring(2, 15),
-        value: cartTotalPrice(cart?.items || []) || 0,
+        value: cartTotalPrice(cart || []) || 0,
         customer_type: "new",
-        items: cartTotalItems(cart?.items || []) || [],
+        items: cartTotalItems(cart || []) || [],
       };
       startCheckoutTracker(trackerData);
     }
@@ -55,7 +57,7 @@ export const CheckoutPage = () => {
       <BaseLayout>
         <section className="mb-10 md:mb-20 mt-10">
           <SectionTitle title="Checkout" />
-          {cart?.items?.length === 0 ? (
+          {cart?.length === 0 ? (
             <EmptyCart />
           ) : (
             <div className="grid grid-cols-1 mx-4 md:mx-0 lg:grid-cols-3 gap-4 lg:gap-8">
@@ -65,7 +67,10 @@ export const CheckoutPage = () => {
                     Checkout Information
                   </h3>
                   <CheckoutForm info={info} setInfo={setInfo} />
-                  <ShippingCost />
+                  <ShippingCost
+                    selectedShipping={selectedShipping}
+                    setSelectedShipping={setSelectedShipping}
+                  />
                   <PaymentMethods />
                 </div>
               </div>

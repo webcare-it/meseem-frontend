@@ -33,6 +33,8 @@ export const LandingPage = () => {
     removeLocalStorage("token");
     removeLocalStorage("user_id");
     removeLocalStorage("guest_user_id");
+    removeLocalStorage("selected_shipping_method");
+    removeLocalStorage("selected_payment_method");
   }, []);
 
   if (isLoading) return <LandingSkeleton />;

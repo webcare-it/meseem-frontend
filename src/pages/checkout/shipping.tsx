@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 import { useShippingCost } from "@/api/queries/useShipping";
 import { useShippingCostMutation } from "@/api/mutations/useShipping";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -8,17 +8,23 @@ import { cn } from "@/lib/utils";
 import type { ShippingType } from "@/type";
 import { Truck } from "lucide-react";
 import { toast } from "react-hot-toast";
-
-import { getGuestUserId, getSelectedShippingMethod, getUserId } from "@/helper";
+import { getGuestUserId, getUserId } from "@/helper";
 import { revalidateQueryFn } from "@/lib/query-client";
 import { apiErrorHandler } from "@/api/utils/error";
 
-export const ShippingCost = () => {
+interface Props {
+  selectedShipping: string;
+  setSelectedShipping: (id: string) => void;
+}
+
+export const ShippingCost = ({
+  selectedShipping,
+  setSelectedShipping,
+}: Props) => {
   const isProcessingRef = useRef(false);
 
   const { data, isLoading } = useShippingCost();
   const { mutate, isPending } = useShippingCostMutation();
-  const [selectedShipping, setSelectedShipping] = useState<string>("");
 
   const shippingOption = useMemo(
     () => (data?.data as ShippingType[]) || [],
@@ -52,11 +58,7 @@ export const ShippingCost = () => {
         onSuccess: (response) => {
           isProcessingRef.current = false;
           if (response?.result) {
-            setSelectedShipping(value);
-            if (getSelectedShippingMethod() !== value && value !== "") {
-              localStorage.removeItem("selected_shipping_method");
-              localStorage.setItem("selected_shipping_method", value);
-            }
+            setSelectedShipping(shipping?.id?.toString());
             revalidateQueryFn("get_cart_summary");
             revalidateQueryFn("get_campaign_summary");
             toast.success(
@@ -75,16 +77,6 @@ export const ShippingCost = () => {
       });
     }
   };
-
-  useEffect(() => {
-    const savedShipping = getSelectedShippingMethod();
-    const shipping = shippingOption?.find(
-      (item: ShippingType) => item?.id?.toString() === savedShipping
-    );
-    if (shipping) {
-      setSelectedShipping(shipping?.id?.toString() || "");
-    }
-  }, [shippingOption]);
 
   if (isLoading) {
     return (
@@ -137,7 +129,7 @@ export const ShippingCost = () => {
                 onClick={() => handleShippingSelect(shipping?.id?.toString())}
                 className={cn(
                   "cursor-pointer py-2 md:py-3 transition-all duration-200 hover:shadow-md flex-1 min-w-xs",
-                  selectedShipping === shipping?.id.toString()
+                  selectedShipping?.toString() === shipping?.id.toString()
                     ? "ring-2 ring-primary bg-primary/5"
                     : "hover:bg-gray-50",
                   isPending && "opacity-50 cursor-not-allowed"

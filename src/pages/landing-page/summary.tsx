@@ -27,11 +27,13 @@ interface CartSummaryType {
 
 interface Props {
   children: React.ReactNode;
-  isShowCartItems?: boolean;
-  className?: string;
+  setSelectedShipping: (id: string) => void;
 }
 
-export const CampaignCartSummary = ({ children }: Props) => {
+export const CampaignCartSummary = ({
+  children,
+  setSelectedShipping,
+}: Props) => {
   const config = useConfig();
 
   const { data } = useGetCampaignSummaryQuery();
@@ -79,7 +81,10 @@ export const CampaignCartSummary = ({ children }: Props) => {
               </div>
 
               <div>
-                <RemoveButton item={item} />
+                <RemoveButton
+                  item={item}
+                  setSelectedShipping={setSelectedShipping}
+                />
               </div>
             </div>
           ))}
@@ -138,12 +143,26 @@ export const CampaignCartSummary = ({ children }: Props) => {
   );
 };
 
-const RemoveButton = ({ item }: { item: StateSyncType }) => {
+interface BtnProps {
+  item: StateSyncType;
+  setSelectedShipping: (id: string) => void;
+}
+
+const RemoveButton = ({ item, setSelectedShipping }: BtnProps) => {
+  const campaign = useSelector((state: RootStateType) => state.campaign?.items);
   const { removeLoading, fnRemoveCart } = useCampaignRemoveCart(item);
+
+  const handleClick = () => {
+    if (campaign?.length === 1) {
+      setSelectedShipping("");
+    }
+
+    fnRemoveCart();
+  };
 
   return (
     <Button
-      onClick={fnRemoveCart}
+      onClick={handleClick}
       disabled={removeLoading}
       variant="ghost"
       size="sm">
