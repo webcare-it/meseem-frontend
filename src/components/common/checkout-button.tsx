@@ -4,7 +4,6 @@ import type { ProductDetailsType, ProductType } from "@/type";
 import { useAddToCart } from "@/controllers/cartController";
 import { Spinner } from "../ui/spinner";
 import type { VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils";
 
 interface Props {
   product: ProductType | ProductDetailsType;
@@ -50,12 +49,12 @@ export const CheckoutButton = ({
   const style = {
     CARD: {
       size: "xs",
-      variant: "order",
+      variant: "outline",
       icon: <ClipboardCheck className="h-2 w-2" />,
     },
     DETAILS: {
       size: "lg",
-      variant: "order",
+      variant: "outline",
       icon: <ClipboardCheck className="h-4 w-4" />,
     },
   };
@@ -65,15 +64,15 @@ export const CheckoutButton = ({
       <Button
         onClick={handleCheckout}
         disabled={isLoading}
-        variant="order"
-        className={cn("w-full")}
-        size="xs">
+        className="w-full border border-primary text-primary"
+        size="xs"
+        variant="outline">
         {isLoading ? (
           <Spinner />
         ) : (
           <>
-            <ClipboardCheck className="h-4 w-4 hidden md:block text-white" />
-            <span className="text-white text-[10px]">Order now</span>
+            <ClipboardCheck className="h-4 w-4 hidden md:block text-primary" />
+            <span className="text-primary text-[10px]">Order now</span>
           </>
         )}
       </Button>
@@ -84,9 +83,11 @@ export const CheckoutButton = ({
     <Button
       onClick={handleCheckout}
       disabled={isLoading}
-      className="w-full"
-      variant="order"
-      size={style[type].size as VariantProps<typeof buttonVariants>["size"]}>
+      className="w-full border border-primary text-primary"
+      size={style[type].size as VariantProps<typeof buttonVariants>["size"]}
+      variant={
+        style[type].variant as VariantProps<typeof buttonVariants>["variant"]
+      }>
       {isLoading ? (
         <>
           <Spinner />

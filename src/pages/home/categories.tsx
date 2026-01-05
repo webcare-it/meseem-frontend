@@ -40,7 +40,7 @@ export const CategoriesSection = () => {
             slidesPerView: 3,
           },
           600: {
-            slidesPerView: 4,
+            slidesPerView: 3,
           },
           1024: {
             slidesPerView: 6,
@@ -81,7 +81,7 @@ export const CategoriesSection = () => {
               <SwiperSlide key={category?.id}>
                 <Link
                   to={`/categories/${category?.id}/${slugify(category?.name)}`}
-                  className="flex flex-col items-center px-1 mx-1 sm:px-2 sm:mx-2 min-w-fit sm:min-w-0 group"
+                  className="flex flex-col items-center px-1 sm:px-2 mx-2 min-w-fit sm:min-w-0 group"
                   aria-label={`Explore ${category?.name}`}>
                   <div className="w-20 h-16 sm:w-24 sm:h-20 md:w-28 md:h-24 rounded-lg bg-primary/10 flex items-center justify-center overflow-hidden shadow-md group-hover:bg-primary/20 transition-colors duration-300 relative p-1 sm:p-2 select-none">
                     <OptimizedImage

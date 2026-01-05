@@ -23,7 +23,7 @@ export const ProductCard = ({ product }: Props) => {
 
   return (
     <>
-      <div className="group relative mt-2 md:mt-0 w-[178px] md:w-[237px] overflow-hidden rounded-lg border bg-card transition-all hover:scale-105 cursor-pointer duration-300 select-none">
+      <div className="group relative mt-2 md:mt-0 overflow-hidden rounded-lg border bg-card transition-all hover:scale-105 cursor-pointer duration-300 select-none">
         <WishlistButton product={product} size="DEFAULT" />
         <Discount product={product} type="CARD" />
 
@@ -37,15 +37,15 @@ export const ProductCard = ({ product }: Props) => {
           </div>
         </Link>
 
-        <div className="p-2 sm:p-3">
+        <div className="p-1.5 sm:p-3">
           <Link to={`/products/${product?.id}/${slugify(product?.name)}`}>
             <Review product={product} starSize="w-3 h-3" />
-            <h3 className="line-clamp-1 mt-0.5 text-sm font-medium leading-tight text-foreground duration-300">
+            <h3 className="line-clamp-1 mt-0.5 text-xs md:text-sm font-medium leading-tight text-foreground duration-300">
               {product?.name}
             </h3>
 
             <div className="mb-2 flex items-center gap-2 duration-300">
-              <span className="text-lg font-bold text-foreground">
+              <span className="text-base md:text-lg font-bold text-foreground">
                 {product?.main_price}
               </span>
               {product?.has_discount && (
@@ -56,7 +56,7 @@ export const ProductCard = ({ product }: Props) => {
             </div>
           </Link>
 
-          <div className="flex  items-center gap-2 duration-300">
+          <div className="flex items-center gap-1.5 md:gap-2 duration-300">
             <div className="flex-1 w-full">
               <CartButton
                 product={product}

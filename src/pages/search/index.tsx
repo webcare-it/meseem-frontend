@@ -61,7 +61,7 @@ export const SearchPage = () => {
                 </AnimationWrapper>
               ))
             ) : (
-              <div className="w-full">
+              <div className="col-span-full px-4">
                 <NoDataFound title={"No products found"} />
               </div>
             )}
