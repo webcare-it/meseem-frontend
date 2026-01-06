@@ -49,12 +49,12 @@ export const CheckoutButton = ({
   const style = {
     CARD: {
       size: "xs",
-      variant: "outline",
+      variant: "order",
       icon: <ClipboardCheck className="h-2 w-2" />,
     },
     DETAILS: {
       size: "lg",
-      variant: "outline",
+      variant: "order",
       icon: <ClipboardCheck className="h-4 w-4" />,
     },
   };
@@ -64,15 +64,15 @@ export const CheckoutButton = ({
       <Button
         onClick={handleCheckout}
         disabled={isLoading}
-        className="w-full border border-primary text-primary"
+        className="w-full text-white"
         size="xs"
-        variant="outline">
+        variant="order">
         {isLoading ? (
           <Spinner />
         ) : (
           <>
-            <ClipboardCheck className="h-4 w-4 hidden md:block text-primary" />
-            <span className="text-primary text-[10px]">Order now</span>
+            <ClipboardCheck className="h-4 w-4 hidden md:block text-white" />
+            <span className="text-white text-[10px]">Order now</span>
           </>
         )}
       </Button>
@@ -83,7 +83,7 @@ export const CheckoutButton = ({
     <Button
       onClick={handleCheckout}
       disabled={isLoading}
-      className="w-full border border-primary text-primary"
+      className="w-full text-white"
       size={style[type].size as VariantProps<typeof buttonVariants>["size"]}
       variant={
         style[type].variant as VariantProps<typeof buttonVariants>["variant"]
