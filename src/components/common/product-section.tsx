@@ -5,7 +5,7 @@ import {
 import type { ProductType } from "@/type";
 import { CardLayout } from "@/components/common/card-layout";
 import { ProductCard, ProductCardSkeleton } from "@/components/card/product";
-import { useIsMobile, useIsTablet } from "@/hooks/useMobile";
+import { useIsMobile } from "@/hooks/useMobile";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import { useState } from "react";
@@ -18,10 +18,10 @@ interface Props {
 
 export const ProductSection = ({ isLoading, products, title }: Props) => {
   const isMobile = useIsMobile();
-  const isTablet = useIsTablet();
+
   const [showAll, setShowAll] = useState(false);
 
-  const initialLength = isMobile ? 2 : isTablet ? 5 : 6;
+  const initialLength = isMobile ? 2 : 6;
 
   const handleViewAll = () => {
     setShowAll(true);

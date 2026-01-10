@@ -7,7 +7,7 @@ import type { ProductType } from "@/type";
 import { slugify } from "@/helper";
 import { ProductCard, ProductCardSkeleton } from "@/components/card/product";
 import { CardLayout } from "@/components/common/card-layout";
-import { useIsMobile, useIsTablet } from "@/hooks/useMobile";
+import { useIsMobile } from "@/hooks/useMobile";
 
 interface FormatType {
   categoryId: string;
@@ -19,8 +19,8 @@ interface FormatType {
 
 export const CategoryProductsSection = () => {
   const isMobile = useIsMobile();
-  const isTablet = useIsTablet();
-  const initialLength = isMobile ? 2 : isTablet ? 5 : 6;
+
+  const initialLength = isMobile ? 2 : 6;
   const { data, isLoading } = useGetCategoryProductsForHome();
   const formatted = (data?.data as FormatType[]) || [];
 
